@@ -1,0 +1,49 @@
+{
+  "name": "react-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode development",
+    "prod": "vite --mode production",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.0",
+    "@rhythm-ui/react": "1.1.10",
+    "classnames": "^2.3.2",
+    "dayjs": "^1.11.6",
+    "echarts": "^5.3.3",
+    "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
+    "localtunnel": "^2.0.2",
+    "react": "^18.2.0",
+    "react-confetti": "^6.1.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.4.3",
+    "react-select": "^5.4.0",
+    "react-simple-image-viewer": "^1.2.2",
+    "react-web-share": "^2.0.2",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.8",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@vitejs/plugin-react": "^2.2.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "postcss": "^8.4.19",
+    "rollup-plugin-visualizer": "^5.8.3",
+    "tailwindcss": "^3.2.4",
+    "vite": "^3.2.3"
+  }
+}

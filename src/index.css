@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Italianno&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Vesper+Libre:wght@900&display=swap");
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+@import "@rhythm-ui/react/lib/core.css";
+@import "@rhythm-ui/react/lib/themes/default.css";
+@import "./style.css";
+
+@import "tailwindcss/utilities";

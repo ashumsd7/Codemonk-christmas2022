@@ -1,0 +1,26 @@
+stages:
+  - build
+  - deploy
+
+
+build:
+  image: node:16.15.1-alpine
+  stage: build
+  only:
+    - app.biotechinnovations.com
+  script:
+    - yarn
+    - yarn build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+
+deploy staging:
+  image: python:3.7.9-alpine3.12
+  stage: deploy
+  only:
+    - app.biotechinnovations.com
+  script:
+    - pip install awscli
+    - aws s3 sync ./dist s3://$BUCKET_NAME

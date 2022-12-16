@@ -1,0 +1,28 @@
+.link {
+  color: #0076cf;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 24px;
+}
+
+body {
+  overflow: hidden;
+}
+
+.card-hover {
+  border: 1px solid #eaeaf2;
+  box-shadow: none;
+
+ 
+}
+.card-hover:hover {
+  border: 1px solid #469ddf;
+  filter: drop-shadow(0px 8px 32px rgba(249, 114, 114, 0.08));
+  border-radius: 4px;
+}
+
+.button-link {
+  line-height: 24px;
+  font-size: 16px;
+  font-size: 500;
+}
