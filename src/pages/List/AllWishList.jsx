@@ -40,7 +40,7 @@ function AllWishList() {
         <div className=" bg-gradient-to-r py-1 px-4  from-[#ff512f] to-[#dd2476] text-white rounded-md font-extrabold">
           🎉 🎁 Merry Christmas 🎉 🎁 📣 Click the card to show more info like
           address : 📣 Missing Address or any help contact Ashu 👋 : 🎉 🎁 Merry
-          Christmas 🎉 🎁🎉 🎁 Merry Christmas 🎉 
+          Christmas 🎉 🎁🎉 🎁 Merry Christmas 🎉
         </div>
       </marquee>
 
@@ -61,7 +61,32 @@ function AllWishList() {
                   className="p-2 my-4 cursor-pointer card-hover hover:scale-105 duration-150 ease-out bg-gradient-to-r  from-[#ff512f] to-[#dd2476]"
                 >
                   {/* <RhCardBody> */}
-                  <img className="w-1/2" src={codemonk_logo} alt="" />
+                  <div className="flex justify-between">
+                    <img className="w-1/2" src={codemonk_logo} alt="" />
+                    <p className="flex items-center gap-1">
+                      {item?.address?.length > 5 && (
+                        <CopyToClipboard
+                          text={item?.address}
+                          onCopy={(e) => {
+                            RhToast.success("Address copied.");
+                          }}
+                        >
+                          <>
+                            <RhIcon
+                              icon="mdi:tick-decagram"
+                              className="text-green-500"
+                            >
+                              {" "}
+                            </RhIcon>{" "}
+                            <div className="text-white text-sm font-bold">
+                              {" "}
+                              Address
+                            </div>
+                          </>
+                        </CopyToClipboard>
+                      )}
+                    </p>
+                  </div>
                   <RhDivider></RhDivider>
                   <div className="flex flex-col justify-between items-">
                     {/* name */}
@@ -71,11 +96,22 @@ function AllWishList() {
                   </div>
                   <div>
                     <div className="">
-                      {item?.wishList?.map((data) => {
+                      {item?.wishes?.map((data) => {
                         return (
                           <li className="block text-white font-semibold">
                             {" "}
-                            🎁 {data}
+                            🎁
+                            {data.link ? (
+                              <a
+                                target="_blank"
+                                className="cursor-pointer text-white"
+                                href={data.link}
+                              >
+                                {data?.title}{" "}
+                              </a>
+                            ) : (
+                              data?.title
+                            )}
                           </li>
                         );
                       })}
@@ -85,14 +121,6 @@ function AllWishList() {
                       Cultural & Food committee Codemonk
                     </p>
                     {/* button to see */}
-                    {/* <RhIcon
-                      onClick={() => {
-                        setSelectedData(item);
-                        setIsOpen(true);
-                      }}
-                      className="text-blue-500 cursor-pointer hover:scale-150 hover:-rotate-90 duration-100 ease-in-out"
-                      icon="fluent-mdl2:see-do"
-                    ></RhIcon> */}
                   </div>
                   {/* <span className="text-white"> Codemonk Christmas celebration 2022</span> */}
                   {/* </RhCardBody> */}
