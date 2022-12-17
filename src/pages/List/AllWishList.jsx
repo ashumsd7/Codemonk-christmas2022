@@ -19,19 +19,21 @@ import bells from "../../assets/bells.jpg";
 import bellshanging from "../../assets/bellhanging2.gif";
 import bellshanging2 from "../../assets/bellhanging.gif";
 import bell from "../../assets/bell.gif";
+import loader1 from "../../assets/loader1.gif";
 
 function AllWishList() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const { data: employees = [] } = useGetUsersQuery();
+  const { data: employees = [], isLoading } = useGetUsersQuery();
   const [selectedData, setSelectedData] = useState({});
   const [showingData, setShowingData] = useState({});
 
   return (
-    <>
+    <div className="bg-gray-50">
       <div className="flex justify-between text-xl text-[#ff512f] relative ">
         <RhButton
           variant="link"
+          className="font-extrabold"
           onClick={() => {
             navigate("/");
           }}
@@ -45,24 +47,38 @@ function AllWishList() {
           src={bell}
           alt=""
         />
-        {/* <img
-          className="h-22 absolute -top-4 left-10 z-30 animate-pulse "
+          <img
+          className="h-24 absolute top-10 left-0 rotate-0 z-30 animate-pulse "
           src={bell}
           alt=""
-        /> */}
+        />
       </div>
-      <marquee behavior="" loop direction="">
-        <div className=" bg-gradient-to-r py-1 px-4  from-[#ff512f] to-[#dd2476] text-white rounded-md font-extrabold">
-          📣 Click the card to show more info like address : 📣 Missing Address
-          or any help contact Ashu 👋 : 🎉 🎁 Merry Christmas
-        </div>
-      </marquee>
+      <h1
+        onClick={() => {
+          navigate("/");
+        }}
+        className="text-center cursor-pointer lg:text-4xl text-xl mb-4 text-[#ff512f]"
+      >
+        🎉 🎁 Merry Christmas 🎉 🎁{" "}
+      </h1>
 
-      <RhScrollbar className=" h-[90vh]  flex justi items-center border lg:mt-0 lg:m-10 m-2 p-2 lg:p-10 lg:pt-0">
+      <RhScrollbar className=" h-[90vh]  flex justi items-center  lg:mt-0 lg:m-10 m-2 p-2 lg:p-10 lg:pt-0">
+        <div className=" bg-gradient-to-r py-1 px-4  from-[#ff512f] to-[#dd2476] text-white rounded-md flex justify-center items-center font-extrabold">
+          <marquee behavior="" loop direction="">
+            📣 Click the card to show more info like address , Link of gifts and
+            much more... 📣 Missing Address or any help contact Ashu 👋 : 🎉 🎁
+            Merry Christmas
+          </marquee>
+        </div>
+
         <div className="p-4 h-screen mb-20">
-          <h1 className="text-center lg:text-4xl text-xl mb-4 text-[#ff512f]">
-            🎉 🎁 Merry Christmas 🎉 🎁{" "}
-          </h1>
+          {isLoading && (
+            <div className="flex justify-center flex-col items-center">
+              <img src={loader1} alt="" />
+
+              <h1 className=" text-[#ff512f]">Getting wishes....</h1>
+            </div>
+          )}
 
           <div className=" grid lg:grid-cols-4 gap-3 grid-cols-1 mb-20">
             {employees?.map((item) => {
@@ -84,7 +100,7 @@ function AllWishList() {
                       {item?.address && (
                         <RhIcon
                           icon="mdi:tick-decagram"
-                          className="text-white animate-pulse duration-1000"
+                          className="bg-white text-blue-500  p-[2px] rounded-full animate-pulse duration-1000"
                         >
                           {" "}
                         </RhIcon>
@@ -98,15 +114,23 @@ function AllWishList() {
                         return (
                           <li className="block text-white font-semibold">
                             {" "}
-                            🎁
+                            🎁{" "}
                             {data.link ? (
                               <a
                                 target="_blank"
-                                className="cursor-pointer text-white"
+                                className="cursor-pointer text-white  font-semibold"
                                 href={data.link}
                               >
-                                {data?.title}{" "}
+                                {data?.title.length > 15
+                                  ? data?.title
+                                      ?.split("")
+                                      ?.slice(0, 15)
+                                      .join("") + "..."
+                                  : data?.title}
                               </a>
+                            ) : data?.title.length > 15 ? (
+                              data?.title?.split("")?.slice(0, 15).join("") +
+                              "..."
                             ) : (
                               data?.title
                             )}
@@ -118,7 +142,7 @@ function AllWishList() {
                     <p className="text-white text-xs mt-1">
                       Cultural & Food committee Codemonk
                     </p>
-                    <p className="flex items-center justify-end gap-1">
+                    <p className="flex items-center justify-end gap-1 reltive">
                       {item?.address?.length > 5 && (
                         <CopyToClipboard
                           text={item?.address}
@@ -133,9 +157,13 @@ function AllWishList() {
                             >
                               {" "}
                             </RhIcon>{" "}
-                            <div className="text-white text-sm font-bold animate-pulse">
+                            <div className="text-white text-sm flex items-center gap-2 font-bold animate-pulse">
                               {" "}
-                              Click to see Address
+                              Click to see Address{" "}
+                              <RhIcon
+                                className="text-white text-xs"
+                                icon="fa-solid:address-book"
+                              ></RhIcon>
                             </div>
                           </>
                         </CopyToClipboard>
@@ -145,7 +173,7 @@ function AllWishList() {
                   {/* //thanks */}
                   {item?.address && (
                     <>
-                      <div className="animate-pulse text-[#ff512f] absolute top-4 z-10 right-1 rotate-45 translate-x-11 bg-white rounded-md  text-xs font-extrabold w-auto inline-block px-6 py-1">
+                      <div className=" text-white absolute top-4 z-10 right-1 rotate-45 translate-x-11 bg-gray-800 rounded-md  text-xs font-extrabold w-auto inline-block px-6 py-1">
                         Thank you 🎉
                       </div>
                       <div className="absolute top-7 animate-pulse right-0 h-16 z-20 flex  ">
@@ -159,78 +187,91 @@ function AllWishList() {
           </div>
 
           <RhDialog
-            className="w-[90vw] sm:w-[60vw] flex flex-col gap-4 p-10"
+            className="w-[90vw] sm:w-[60vw] flex flex-col gap-4 "
             isOpen={isOpen}
             onClose={() => setIsOpen(!open)}
           >
-            <h2 className="lg:text-xl text-sm text-center w-full">
+            <h2 className="lg:text-4xl text-xl text-center w-full">
               🎁 {selectedData?.name} ⁉️ 🎁{" "}
             </h2>
 
-            {selectedData?.wishes?.length > 0 &&
-              selectedData?.wishes?.map((data, index) => {
-                return (
-                  <>
-                    <div className="">
-                      <RhListItem className="flex items-center  my-1 ">
-                        <RhListItem.Icon variant="primary" align="start">
-                          {
-                            <div className="flex items-center gap-2">
-                              🎉🎁
-                              <RhListItem.Text
-                                primary={
-                                  <>
-                                    {data.link ? (
-                                      <a
-                                        target="_blank"
-                                        className="cursor-pointer text-blue-500"
-                                        href={data.link}
-                                      >
-                                        {data?.title}{" "}
-                                      </a>
-                                    ) : (
-                                      data?.title
-                                    )}
-                                  </>
-                                }
-                              />
-                            </div>
-                          }
-                        </RhListItem.Icon>
-                      </RhListItem>
-                    </div>
+            <RhCard>
+              {selectedData?.wishes?.length > 0 &&
+                selectedData?.wishes?.map((data, index) => {
+                  return (
+                    <>
+                      <div className="">
+                        <RhListItem className="flex items-center  ">
+                          <RhListItem.Icon variant="primary" align="start">
+                            {
+                              <div className="flex items-center gap-2">
+                                🎁
+                                <RhListItem.Text
+                                  primary={
+                                    <>
+                                      {data.link ? (
+                                        <a
+                                          target="_blank"
+                                          className="cursor-pointer text-blue-500"
+                                          href={data.link}
+                                        >
+                                          {data?.title}{" "}
+                                        </a>
+                                      ) : (
+                                        data?.title
+                                      )}
+                                    </>
+                                  }
+                                />
+                              </div>
+                            }
+                          </RhListItem.Icon>
+                        </RhListItem>
+                      </div>
+                    </>
+                  );
+                })}
+              {selectedData?.address?.length > 5 && (
+                <CopyToClipboard
+                  text={selectedData?.address}
+                  onCopy={() => {
+                    RhToast.success("Address copied.");
+                  }}
+                >
+                  <RhCard className="flex flex-wrap flex-col">
+                    <RhCardBody>🗒️ {selectedData?.address}</RhCardBody>
+                  </RhCard>
+                </CopyToClipboard>
+              )}
+            </RhCard>
 
-                    <RhDivider></RhDivider>
-                  </>
-                );
-              })}
-            {selectedData?.address?.length > 5 && (
-              <CopyToClipboard
-                text={selectedData?.address}
-                onCopy={() => {
-                  RhToast.success("Address copied.");
+            <div className="flex justify-between">
+              {selectedData?.address?.length > 5 ? (
+                <CopyToClipboard
+                  text={selectedData?.address}
+                  onCopy={() => {
+                    RhToast.success("Address copied.");
+                  }}
+                >
+                  <p className="flex flex-wrap flex-col">
+                    <RhButton layout="link">Copy Address</RhButton>
+                  </p>
+                </CopyToClipboard>
+              ) : (
+                <div></div>
+              )}
+              <RhButton
+                onClick={() => {
+                  setIsOpen(false);
                 }}
               >
-                <p className="flex flex-wrap flex-col">
-                  <span className="block text-black font-bold cursor-pointer">
-                    click to copy{" "}
-                  </span>
-                  🗒️ {selectedData?.address}
-                </p>
-              </CopyToClipboard>
-            )}
-
-            <RhButton
-              onClick={() => {
-                setIsOpen(false);
-              }}
-            >
-              Ok Kool 👌
-            </RhButton>
+                Ok got it.
+              </RhButton>
+            </div>
           </RhDialog>
         </div>
       </RhScrollbar>
-    </>
+    </div>
   );
 }
 

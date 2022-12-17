@@ -22,8 +22,9 @@ import { Form, Formik } from "formik";
 import { useGetUsersQuery, usePatchUserMutation } from "../../services/api";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { getTokenData, isLoggedIn, logOut } from "../../utils";
-import car_image from "../../assets/car.svg";
 import audio from "../../assets/notify.mp3";
+import car_image from "../../assets/car.svg";
+import running from "../../assets/running.gif";
 import ReactAudioPlayer from "react-audio-player";
 
 function Index() {
@@ -64,20 +65,21 @@ function Index() {
     });
   };
   return (
-    <div className=" h-screen bg-no-repeat bg-cover w-full   bg-[url('https://cdn.pixabay.com/photo/2020/11/13/23/53/christmas-5740363_960_720.png')]">
-      <div className="flex justify-between w-full p-2">
-        {isLoggedIn() && (
-          <>
-            <RhButton
-              className=" flex text-[#ff512f] hover:bg-red-500 hover:text-white  bg-white justify-center gap-2 items-center"
-              // layout="link"
-              onClick={() => setIsInviteFormOpen(true)}
-            >
-              <RhIcon icon="mdi:pencil"></RhIcon>{" "}
-              <span>Edit my wish & address</span>
-            </RhButton>
-          </>
-        )}
+    <div className=" h-screen relative bg-no-repeat bg-cover w-full   bg-[url('https://cdn.pixabay.com/photo/2020/11/13/23/53/christmas-5740363_960_720.png')]">
+      <div className="flex justify-between w-full  gap-2">
+        {
+          <div className="flex-1">
+            <div className=" bg-gradient-to-r py-1 px-4  animate-pulse from-[#ff512f] to-[#dd2476] text-white rounded-md flex justify-center items-center font-extrabold">
+              <marquee behavior="" loop direction="">
+                📣 Event Timings Friday at 4pm on 23rd December 📣 Please
+                remember the date, This Friday at 4pm on 23rd December, Please
+                be available for the meet. 📣 Event Timings Friday at 4pm on
+                23rd December 📣 Event Timings Friday at 4pm on 23rd December 📣
+                : 🎉 🎁 Merry Christmas
+              </marquee>
+            </div>
+          </div>
+        }
         {isLoggedIn() ? (
           <RhTooltip title="Logout" position="left">
             <RhButton
@@ -94,69 +96,73 @@ function Index() {
             </RhButton>
           </RhTooltip>
         ) : (
-          <RhButton
-            layout="link"
-            className=" gap-2 text-[#ff512f]  bg-white flex justify-center items-center"
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            <RhIcon icon="mdi:lock"></RhIcon> <span>Login</span>
-          </RhButton>
+          <></>
         )}
         {/* </div> */}
         {/* <div className=""></div> */}
       </div>
-      {isLoggedIn() && (
-        <div className="flex justify-center ">
-          <RhButton
-            className=" flex ml-2 lg:h-16 h-8   animate-bounce text-white  bg-[#ff512f] hover:bg-red-500 justify-center gap-2 items-center"
-            // layout="link"
-            onClick={() => navigate("/wishlist")}
-          >
-            <RhIcon icon="mdi:eye"></RhIcon>{" "}
-            <span className="font-extrabold lg:text-xl text-sm  ">
-              See wishlist of all Monks
-            </span>
-          </RhButton>
-        </div>
-      )}
 
       <div className="flex justify-center items-center h-full">
-        <div className="flex justify-center  gap-10 flex-wrap ">
-          <div className="mt-10 ">
+        <div className="flex justify-center flex-col  gap-10 flex-wrap ">
+          <div className="flex gap-12 justify-center items-center flex-wrap">
+            {isLoggedIn() && (
+              <>
+                <div
+                  onClick={() => navigate("/wishlist")}
+                  className="h-36 w-36 bg-gradient-to-r  cursor-pointer from-[#ff512f] to-[#dd2476] flex-col   rounded-full flex justify-center items-center"
+                >
+                  <p className="animate-bounce"> 🎁 </p>
+                  <p className="text-white font-extrabold">See Wish List</p>
+                </div>
+
+                <div
+                  onClick={() => setIsInviteFormOpen(true)}
+                  className="h-36 w-36 bg-gradient-to-r  cursor-pointer from-[#ff512f] to-[#dd2476] flex-col   rounded-full flex justify-center items-center"
+                >
+                  <p className="animate-bounce"> ✏️ </p>
+                  <p className="text-white font-extrabold">Edit My Wishes</p>
+                </div>
+              </>
+            )}
+
+            {!isLoggedIn() && (
+              <div
+                onClick={() => {
+                  navigate("/login");
+                }}
+                className="h-36 w-36 bg-gradient-to-r cursor-pointer from-[#ff512f] to-[#dd2476] flex-col   rounded-full flex justify-center items-center"
+              >
+                <p> 🔏 </p>
+                <p className="text-white font-extrabold">Login</p>
+              </div>
+            )}
+          </div>
+
+          {/* input */}
+          <div className="">
             <div className="h-6 mb-4 flex justify-center">
               {searchFilter.length > 0 && filteredEmployees?.length > 0 && (
                 <RhLabel className="text-white text-center">
                   👁️ Click on list see wish list of the monk 👁️
                 </RhLabel>
               )}
-              {!isLoggedIn() && (
-                <RhButton
-                  layout=""
-                  className=" gap-2 text  bg-[#ff512f] py-4 flex justify-center items-center"
-                  onClick={() => {
-                    navigate("/login");
-                  }}
-                >
-                  <RhIcon icon="mdi:lock"></RhIcon>{" "}
-                  <span>Login to continue..</span>
-                </RhButton>
-              )}
             </div>
-            <RhInputGroup>
-              <RhIcon icon="ic:round-search" size="lg" />
-              <RhInput
-                // disabled={isLoading}
-                type="text"
-                placeholder=" Who is your secret monk ?"
-                className="py-4 px-6"
-                value={searchFilter}
-                disabled={!isLoggedIn()}
-                onChange={(e) => setSearchFilter(e.target.value)}
-              />
-            </RhInputGroup>
-
+            {isLoggedIn() ? (
+              <RhInputGroup className="bg-gradient-to-r animate-pulse  from-[#ff512f] to-[#dd2476]">
+                <RhIcon icon="ic:round-search" size="lg" />
+                <RhInput
+                  // disabled={isLoading}
+                  type="text"
+                  placeholder=" Who is your secret monk ?"
+                  className="py-4 px-6 "
+                  value={searchFilter}
+                  disabled={!isLoggedIn()}
+                  onChange={(e) => setSearchFilter(e.target.value)}
+                />
+              </RhInputGroup>
+            ) : (
+              <></>
+            )}
             <RhScrollbar className="max-w-md h-[200px] overflow-y-auto">
               {searchFilter &&
                 filteredEmployees?.map((item) => {
@@ -191,7 +197,7 @@ function Index() {
                   );
                 })}
               {searchFilter && filteredEmployees?.length == 0 && (
-                <div className="bg-white p-2 mt-3">No Records...</div>
+                <div className="bg-white p-2 mt-3">No Monks found..</div>
               )}
             </RhScrollbar>
           </div>
@@ -205,7 +211,7 @@ function Index() {
           isOpen={isInviteFormOpen}
           onClose={() => setIsInviteFormOpen(!open)}
         >
-          <h2 className="lg:tex-xl text-sm">
+          <h2 className="lg:tex-4xl text-xl">
             {" "}
             🎁 Update Wish List & Address 🎁
           </h2>
@@ -281,93 +287,94 @@ function Index() {
 
         {/* //show */}
         <RhDialog
-          className=" flex flex-col gap-6 p-10 w-[90vw] sm:w-[60vw]"
+          className=" flex flex-col gap-6  w-[90vw] sm:w-[60vw]"
           isOpen={isOpen}
           onClose={() => {
             setShowingData({});
             setIsOpen(!open);
           }}
         >
+          <RhCard>
+            <RhCardBody>
+              <div className="flex justify-between">
+                <h2 className="lg:text-4xl text-xl mb-4 text-center w-full">
+                  {" "}
+                  🎁 {showingData?.name} ⁉️ 🎁
+                </h2>
+
+                {loggedInUser?.id == showingData?._id && (
+                  <RhIcon
+                    className="bg-blue-500 p-2 cursor-pointer rounded-full text-white shadow-md"
+                    onClick={() => {
+                      setIsOpen(false);
+                      setIsInviteFormOpen(true);
+                    }}
+                    icon="mdi:pencil"
+                  ></RhIcon>
+                )}
+              </div>
+
+              <div className="">
+                <div className="flex justify-center items-center gap-4"></div>
+
+                {showingData?.wishes?.length > 0 &&
+                  showingData?.wishes?.map((data, index) => {
+                    return (
+                      <>
+                        <div className="">
+                          <RhListItem className="flex items-center  my-2 ">
+                            <RhListItem.Icon variant="primary" align="start">
+                              {
+                                <div className="flex items-center gap-2">
+                                  {/* <span className="font-extrabold">{index + 1}</span>  */}
+                                  🎁
+                                  <RhListItem.Text
+                                    primary={
+                                      <>
+                                        {data.link ? (
+                                          <a
+                                            target="_blank"
+                                            className="cursor-pointer text-blue-500"
+                                            href={data.link}
+                                          >
+                                            {data?.title}{" "}
+                                          </a>
+                                        ) : (
+                                          data?.title
+                                        )}
+                                      </>
+                                    }
+                                  />
+                                </div>
+                              }
+                            </RhListItem.Icon>
+                          </RhListItem>
+                        </div>
+                      </>
+                    );
+                  })}
+
+                {showingData?.address?.length > 5 && (
+                  <RhCard>
+                    <RhCardBody>
+                      <CopyToClipboard
+                        text={showingData?.address}
+                        onCopy={() => {
+                          RhToast.success("Address copied.");
+                        }}
+                      >
+                        <p className="flex flex-wrap flex-col">
+                          🗒️ {showingData?.address}
+                        </p>
+                      </CopyToClipboard>
+                    </RhCardBody>
+                  </RhCard>
+                )}
+              </div>
+            </RhCardBody>
+          </RhCard>
           <div className="flex justify-between">
-            <h2 className="lg:text-xl text-sm text-center w-full">
-              {" "}
-              🎁 {showingData?.name} ⁉️ 🎁
-            </h2>
-            {loggedInUser?.id == showingData?._id && (
-              <RhIcon
-                className="bg-blue-500 p-2 cursor-pointer rounded-full text-white shadow-md"
-                onClick={() => {
-                  setIsOpen(false);
-                  setIsInviteFormOpen(true);
-                }}
-                icon="mdi:pencil"
-              ></RhIcon>
-            )}
-          </div>
-
-          <div className="">
-            <div className="flex justify-center items-center">
-              <img
-                src={car_image}
-                alt=""
-                className="lg:h-32 lg:w-32 h-12 w-12"
-              />
-              <img
-                src={car_image}
-                alt=""
-                className="lg:h-32 lg:w-32 h-12 w-12"
-              />
-              <img
-                src={car_image}
-                alt=""
-                className="lg:h-32 lg:w-32 h-12 w-12"
-              />
-            </div>
-            <RhDivider></RhDivider>
-            {showingData?.wishes?.length > 0 &&
-              showingData?.wishes?.map((data, index) => {
-                return (
-                  <>
-                    <div className="">
-                      <RhListItem className="flex items-center  my-1 ">
-                        <RhListItem.Icon variant="primary" align="start">
-                          {
-                            <div className="flex items-center gap-2">
-                              {/* <span className="font-extrabold">{index + 1}</span>  */}
-                              🎉🎁
-                              <RhListItem.Text
-                                primary={
-                                  <>
-                                    {data.link ? (
-                                      <a
-                                        target="_blank"
-                                        className="cursor-pointer text-blue-500"
-                                        href={data.link}
-                                      >
-                                        {data?.title}{" "}
-                                      </a>
-                                    ) : (
-                                      data?.title
-                                    )}
-                                    {/* //{" "}
-                                    <p className="button">
-                                      // {data || " ❌  ( not updated )  ❌ "}
-                                      //{" "}
-                                    </p> */}
-                                  </>
-                                }
-                              />
-                            </div>
-                          }
-                        </RhListItem.Icon>
-                      </RhListItem>
-                    </div>
-
-                    <RhDivider></RhDivider>
-                  </>
-                );
-              })}
-            {showingData?.address?.length > 5 && (
+            {showingData?.address?.length > 5 ? (
               <CopyToClipboard
                 text={showingData?.address}
                 onCopy={() => {
@@ -375,25 +382,28 @@ function Index() {
                 }}
               >
                 <p className="flex flex-wrap flex-col">
-                  <span className="block text-black font-bold cursor-pointer">
-                    click to copy{" "}
-                  </span>
-                  🗒️ {showingData?.address}
+                  <RhButton layout="link">Copy Address</RhButton>
                 </p>
               </CopyToClipboard>
+            ) : (
+              <div></div>
             )}
-          </div>
-          <div className="flex justify-end">
             <RhButton
               onClick={() => {
                 setIsOpen(false);
               }}
               disabled={isLoading}
             >
-              Ok Kool 👌
+              Ok Got it
             </RhButton>
           </div>
         </RhDialog>
+      </div>
+      <div className="absolute bottom-0 right-0">
+        <img className="h-40" src={running}></img>
+      </div>
+      <div className="absolute bottom-0 left-0">
+        <img className="h-40" src={running}></img>
       </div>
     </div>
   );

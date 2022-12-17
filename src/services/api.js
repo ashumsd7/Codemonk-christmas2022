@@ -52,7 +52,7 @@ export const mainApi = createApi({
       },
       onQueryStarted(_, { queryFulfilled }) {
         queryFulfilled.catch(() =>
-          RhToast.error("Login to see and add wishlist")
+          RhToast.info("Login to see and add wishlist")
         );
       },
     }),
