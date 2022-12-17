@@ -22,6 +22,8 @@ import { Form, Formik } from "formik";
 import { useGetUsersQuery, usePatchUserMutation } from "../../services/api";
 import { getTokenData, isLoggedIn, logOut } from "../../utils";
 import car_image from "../../assets/car.svg";
+import audio from "../../assets/notify.mp3";
+import ReactAudioPlayer from "react-audio-player";
 
 function Index() {
   const { data: employees = [] } = useGetUsersQuery();
@@ -63,13 +65,15 @@ function Index() {
     <div className=" h-screen bg-no-repeat bg-cover w-full   bg-[url('https://cdn.pixabay.com/photo/2020/11/13/23/53/christmas-5740363_960_720.png')]">
       <div className="flex justify-between w-full p-2">
         {isLoggedIn() && (
-          <RhButton
-            className=" flex text-white justify-center gap-2 items-center"
-            layout="link"
-            onClick={() => setIsInviteFormOpen(true)}
-          >
-            <RhIcon icon="mdi:pencil"></RhIcon> <span>Edit my wish</span>
-          </RhButton>
+          <>
+            <RhButton
+              className=" flex text-[#ff512f]   bg-white justify-center gap-2 items-center"
+              // layout="link"
+              onClick={() => setIsInviteFormOpen(true)}
+            >
+              <RhIcon icon="mdi:pencil"></RhIcon> <span>Edit my wish</span>
+            </RhButton>
+          </>
         )}
         {isLoggedIn() ? (
           <RhTooltip title="Logout" position="left">
@@ -86,7 +90,7 @@ function Index() {
         ) : (
           <RhButton
             layout="link"
-            className=" gap-2 text-white flex justify-center items-center"
+            className=" gap-2 text-[#ff512f]  bg-white flex justify-center items-center"
             onClick={() => {
               navigate("/login");
             }}
@@ -97,14 +101,38 @@ function Index() {
         {/* </div> */}
         {/* <div className=""></div> */}
       </div>
+      {isLoggedIn() && (
+        <div className="flex justify-center">
+          <RhButton
+            className=" flex ml-2 text-white  bg-[#ff512f] hover:bg-red-500 justify-center gap-2 items-center"
+            // layout="link"
+            onClick={() => navigate("/wishlist")}
+          >
+            <RhIcon icon="mdi:eye"></RhIcon> <span>See the wish list</span>
+          </RhButton>
+        </div>
+      )}
+
       <div className="flex justify-center items-center h-full">
         <div className="flex justify-center  gap-10 flex-wrap ">
           <div className="mt-10 ">
-            <div className="h-6 mb-4">
+            <div className="h-6 mb-4 flex justify-center">
               {searchFilter.length > 0 && filteredEmployees?.length > 0 && (
                 <RhLabel className="text-white text-center">
-                  👁️ Click on list see wish list 👁️
+                  👁️ Click on list see wish list of the monk 👁️
                 </RhLabel>
+              )}
+              {!isLoggedIn() && (
+                <RhButton
+                  layout=""
+                  className=" gap-2 text  bg-[#ff512f] py-4 flex justify-center items-center"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  <RhIcon icon="mdi:lock"></RhIcon>{" "}
+                  <span>Login to continue..</span>
+                </RhButton>
               )}
             </div>
             <RhInputGroup>
@@ -115,6 +143,7 @@ function Index() {
                 placeholder="Kiranraj"
                 className="py-4 px-6"
                 value={searchFilter}
+                disabled={!isLoggedIn()}
                 onChange={(e) => setSearchFilter(e.target.value)}
               />
             </RhInputGroup>
@@ -158,6 +187,8 @@ function Index() {
             </RhScrollbar>
           </div>
         </div>
+
+        {/* <ReactAudioPlayer src={audio} autoPlay controls /> */}
 
         {/* // add wishlist */}
         <RhDialog
@@ -226,7 +257,7 @@ function Index() {
           <div className="flex justify-between">
             <h2 className="lg:text-xl text-sm text-center w-full">
               {" "}
-              🎁 {showingData?.name} ⁉️{" "}  🎁 
+              🎁 {showingData?.name} ⁉️ 🎁
             </h2>
             {loggedInUser?.id == showingData?._id && (
               <RhIcon

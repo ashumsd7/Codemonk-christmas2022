@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { RhThemeProvider, RhToastContainer } from "@rhythm-ui/react";
 import App from "./App";
 import { store } from "./store";
+import mp3 from "../src/assets/notify.mp3";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <RhThemeProvider theme="light">
         <RhToastContainer />
         <App />
+        <audio src="./src/assets/notify2.mp3" autoPlay loop></audio>
       </RhThemeProvider>
     </Provider>
   </React.StrictMode>

@@ -29,7 +29,7 @@ function AllWishList() {
             navigate("/");
           }}
         >
-          Back to home
+          Back to home {employees?.length}
         </RhButton>
       </div>
 
@@ -68,7 +68,7 @@ function AllWishList() {
           <RhDialog
             className="w-[90vw] sm:w-[60vw] flex flex-col gap-6 p-10"
             isOpen={isOpen}
-            onClose={() => setIsOpen(!open)}
+          onClose={() => setIsOpen(!open)}
           >
             <h2 className="lg:text-xl text-sm text-center w-full">
               🎁 {selectedData?.name} ⁉️ 🎁{" "}
