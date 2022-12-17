@@ -8,9 +8,11 @@ import {
   RhListItem,
   RhDivider,
   RhScrollbar,
+  RhToast,
 } from "@rhythm-ui/react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useGetUsersQuery } from "../../services/api";
 import codemonk_logo from "../../assets/logocodemonk.png";
 
@@ -34,12 +36,20 @@ function AllWishList() {
           home
         </RhButton>
       </div>
+      <marquee behavior="" loop direction="">
+        <div className=" bg-gradient-to-r py-1 px-4  from-[#ff512f] to-[#dd2476] text-white rounded-md font-extrabold">
+          🎉 🎁 Merry Christmas 🎉 🎁 📣 Click the card to show more info like
+          address : 📣 Missing Address or any help contact Ashu 👋 : 🎉 🎁 Merry
+          Christmas 🎉 🎁🎉 🎁 Merry Christmas 🎉 
+        </div>
+      </marquee>
 
-      <RhScrollbar className=" h-[90vh] flex justi items-center border lg:m-10 m-2 p-2 lg:p-10">
+      <RhScrollbar className=" h-[90vh] flex justi items-center border lg:mt-0 lg:m-10 m-2 p-2 lg:p-10 lg:pt-0">
         <div className="p-4 h-screen">
-          <h1 className="text-center lg:text-4xl text-xl mb-4">
+          <h1 className="text-center lg:text-4xl text-xl mb-4 text-[#ff512f]">
             🎉 🎁 Merry Christmas 🎉 🎁{" "}
           </h1>
+
           <div className=" grid lg:grid-cols-4 gap-3 grid-cols-1">
             {employees?.map((item) => {
               return (
@@ -100,7 +110,7 @@ function AllWishList() {
               🎁 {selectedData?.name} ⁉️ 🎁{" "}
             </h2>
 
-            {selectedData?.wishList?.length > 0 &&
+            {/* {selectedData?.wishList?.length > 0 &&
               selectedData?.wishList?.map((data, index) => {
                 return (
                   <>
@@ -108,7 +118,7 @@ function AllWishList() {
                       <RhListItem.Icon variant="primary" align="start">
                         {
                           <div className="flex items-center gap-2">
-                            {/* <span className="font-extrabold">{index + 1}</span>  */}
+                          
                             🎉🎁
                             <RhListItem.Text
                               primary={
@@ -124,9 +134,65 @@ function AllWishList() {
                     <RhDivider></RhDivider>
                   </>
                 );
-              })}
+              })} */}
+            {selectedData?.wishes?.length > 0 &&
+              selectedData?.wishes?.map((data, index) => {
+                return (
+                  <>
+                    <div className="">
+                      <RhListItem className="flex items-center  my-1 ">
+                        <RhListItem.Icon variant="primary" align="start">
+                          {
+                            <div className="flex items-center gap-2">
+                              {/* <span className="font-extrabold">{index + 1}</span>  */}
+                              🎉🎁
+                              <RhListItem.Text
+                                primary={
+                                  <>
+                                    {data.link ? (
+                                      <a
+                                        target="_blank"
+                                        className="cursor-pointer text-blue-500"
+                                        href={data.link}
+                                      >
+                                        {data?.title}{" "}
+                                      </a>
+                                    ) : (
+                                      data?.title
+                                    )}
+                                    {/* //{" "}
+                                    <p className="button">
+                                      // {data || " ❌  ( not updated )  ❌ "}
+                                      //{" "}
+                                    </p> */}
+                                  </>
+                                }
+                              />
+                            </div>
+                          }
+                        </RhListItem.Icon>
+                      </RhListItem>
+                    </div>
 
-            <span className="flex flex-wrap">🗒️ {selectedData?.address}</span>
+                    <RhDivider></RhDivider>
+                  </>
+                );
+              })}
+            {selectedData?.address?.length > 5 && (
+              <CopyToClipboard
+                text={selectedData?.address}
+                onCopy={() => {
+                  RhToast.success("Address copied.");
+                }}
+              >
+                <p className="flex flex-wrap flex-col">
+                  <span className="block text-black font-bold cursor-pointer">
+                    click to copy{" "}
+                  </span>
+                  🗒️ {selectedData?.address}
+                </p>
+              </CopyToClipboard>
+            )}
 
             <RhButton
               onClick={() => {

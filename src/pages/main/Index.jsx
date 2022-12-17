@@ -20,6 +20,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { useGetUsersQuery, usePatchUserMutation } from "../../services/api";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { getTokenData, isLoggedIn, logOut } from "../../utils";
 import car_image from "../../assets/car.svg";
 import audio from "../../assets/notify.mp3";
@@ -56,13 +57,11 @@ function Index() {
   const initialValues = {};
 
   const onSubmitWish = (data) => {
-    updateProfile({ wishList: data.wishList, address: data.address }).then(
-      () => {
-        RhToast.success(" Hurrah updated 🎉");
-        setIsInviteFormOpen(false);
-        // window.location.reload();
-      }
-    );
+    updateProfile({ wishes: data.wishes, address: data.address }).then(() => {
+      RhToast.success(" Hurrah updated 🎉");
+      setIsInviteFormOpen(false);
+      window.location.reload();
+    });
   };
   return (
     <div className=" h-screen bg-no-repeat bg-cover w-full   bg-[url('https://cdn.pixabay.com/photo/2020/11/13/23/53/christmas-5740363_960_720.png')]">
@@ -221,15 +220,28 @@ function Index() {
             {({ values }) => (
               <Form>
                 <div>
-                  {values?.wishList?.map((wish, index) => (
-                    <RhInputFormik
-                      block
-                      required
-                      label="  🎉  Wishlist"
-                      type="text"
-                      name={`wishList[${index}]`}
-                      className="mb-2 "
-                    />
+                  {values?.wishes?.map((wish, index) => (
+                    <div className="my-4">
+                      {console.log(wish)}
+                      <RhInputFormik
+                        block
+                        required
+                        label="  🎉  Wish "
+                        type="text"
+                        name={`wishes[${index}].title`}
+                        className=" "
+                      />
+                      <RhInputFormik
+                        block
+                        // required
+                        isOptional
+                        // label="Link ( paste link if you want)"
+                        type="text"
+                        placeholder="Link ( paste link if you want)"
+                        name={`wishes[${index}].link`}
+                        className="mb-2 h-6 text-sm"
+                      />
+                    </div>
                   ))}
 
                   <RhInputFormik
@@ -312,8 +324,8 @@ function Index() {
               />
             </div>
             <RhDivider></RhDivider>
-            {showingData?.wishList?.length > 0 &&
-              showingData?.wishList?.map((data, index) => {
+            {showingData?.wishes?.length > 0 &&
+              showingData?.wishes?.map((data, index) => {
                 return (
                   <>
                     <div className="">
@@ -325,9 +337,24 @@ function Index() {
                               🎉🎁
                               <RhListItem.Text
                                 primary={
-                                  <p className="button">
-                                    {data || " ❌  ( not updated )  ❌ "}
-                                  </p>
+                                  <>
+                                    {data.link ? (
+                                      <a
+                                        target="_blank"
+                                        className="cursor-pointer text-blue-500"
+                                        href={data.link}
+                                      >
+                                        {data?.title}{" "}
+                                      </a>
+                                    ) : (
+                                      data?.title
+                                    )}
+                                    {/* //{" "}
+                                    <p className="button">
+                                      // {data || " ❌  ( not updated )  ❌ "}
+                                      //{" "}
+                                    </p> */}
+                                  </>
                                 }
                               />
                             </div>
@@ -340,8 +367,21 @@ function Index() {
                   </>
                 );
               })}
-            🗒️{" "}
-            <span className="flex flex-wrap mt-2">{showingData?.address}</span>
+            {showingData?.address?.length > 5 && (
+              <CopyToClipboard
+                text={showingData?.address}
+                onCopy={() => {
+                  RhToast.success("Address copied.");
+                }}
+              >
+                <p className="flex flex-wrap flex-col">
+                  <span className="block text-black font-bold cursor-pointer">
+                    click to copy{" "}
+                  </span>
+                  🗒️ {showingData?.address}
+                </p>
+              </CopyToClipboard>
+            )}
           </div>
           <div className="flex justify-end">
             <RhButton
