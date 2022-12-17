@@ -56,11 +56,13 @@ function Index() {
   const initialValues = {};
 
   const onSubmitWish = (data) => {
-    updateProfile({ wishList: data.wishList }).then(() => {
-      RhToast.success(" Hurrah updated 🎉");
-      setIsInviteFormOpen(false);
-      window.location.reload();
-    });
+    updateProfile({ wishList: data.wishList, address: data.address }).then(
+      () => {
+        RhToast.success(" Hurrah updated 🎉");
+        setIsInviteFormOpen(false);
+        // window.location.reload();
+      }
+    );
   };
   return (
     <div className=" h-screen bg-no-repeat bg-cover w-full   bg-[url('https://cdn.pixabay.com/photo/2020/11/13/23/53/christmas-5740363_960_720.png')]">
@@ -72,7 +74,8 @@ function Index() {
               // layout="link"
               onClick={() => setIsInviteFormOpen(true)}
             >
-              <RhIcon icon="mdi:pencil"></RhIcon> <span>Edit my wish</span>
+              <RhIcon icon="mdi:pencil"></RhIcon>{" "}
+              <span>Edit my wish & address</span>
             </RhButton>
           </>
         )}
@@ -108,11 +111,14 @@ function Index() {
       {isLoggedIn() && (
         <div className="flex justify-center">
           <RhButton
-            className=" flex ml-2 text-white  bg-[#ff512f] hover:bg-red-500 justify-center gap-2 items-center"
+            className=" flex ml-2 lg:h-16 h-8  animate-bounce text-white  bg-[#ff512f] hover:bg-red-500 justify-center gap-2 items-center"
             // layout="link"
             onClick={() => navigate("/wishlist")}
           >
-            <RhIcon icon="mdi:eye"></RhIcon> <span>See the wish list</span>
+            <RhIcon icon="mdi:eye"></RhIcon>{" "}
+            <span className="font-extrabold lg:text-xl text-sm ">
+              See wishlist of all Monks
+            </span>
           </RhButton>
         </div>
       )}
@@ -196,14 +202,16 @@ function Index() {
 
         {/* // add wishlist */}
         <RhDialog
-          className=" flex flex-col gap-6 p-10 w-[90vw] sm:w-[60vw]"
+          className=" flex flex-col gap-4 p-10 w-[90vw] sm:w-[60vw]"
           isOpen={isInviteFormOpen}
           onClose={() => setIsInviteFormOpen(!open)}
         >
-          <h2> 🎁 Update Wish List 🎁</h2>
-          <span>{currentEmployee?.name}</span>
-
+          <h2 className="lg:tex-xl text-lg">
+            {" "}
+            🎁 Update Wish List & Address 🎁
+          </h2>
           <RhDivider></RhDivider>
+          {/* <span>{currentEmployee?.name}</span> */}
 
           <Formik
             initialValues={currentEmployee}
@@ -217,12 +225,22 @@ function Index() {
                     <RhInputFormik
                       block
                       required
-                      label="Wishlist"
+                      label="  🎉  Wishlist"
                       type="text"
                       name={`wishList[${index}]`}
-                      className=" "
+                      className="mb-2 "
                     />
                   ))}
+
+                  <RhInputFormik
+                    block
+                    required
+                    label="🗒️ Address ( with Pin Code and  Mo. No.)"
+                    type="textarea"
+                    name="address"
+                    className=" "
+                    rows="4"
+                  />
 
                   <div className="flex justify-between my-5">
                     <RhButton
@@ -322,6 +340,8 @@ function Index() {
                   </>
                 );
               })}
+            🗒️{" "}
+            <span className="flex flex-wrap mt-2">{showingData?.address}</span>
           </div>
           <div className="flex justify-end">
             <RhButton
