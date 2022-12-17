@@ -206,7 +206,7 @@ function Index() {
           isOpen={isInviteFormOpen}
           onClose={() => setIsInviteFormOpen(!open)}
         >
-          <h2 className="lg:tex-xl text-lg">
+          <h2 className="lg:tex-xl text-sm">
             {" "}
             🎁 Update Wish List & Address 🎁
           </h2>
@@ -317,7 +317,7 @@ function Index() {
                 return (
                   <>
                     <div className="">
-                      <RhListItem className="flex items-center h-8 my-1 ">
+                      <RhListItem className="flex items-center  my-1 ">
                         <RhListItem.Icon variant="primary" align="start">
                           {
                             <div className="flex items-center gap-2">

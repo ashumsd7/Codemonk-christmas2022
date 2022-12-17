@@ -104,7 +104,7 @@ function AllWishList() {
               selectedData?.wishList?.map((data, index) => {
                 return (
                   <>
-                    <RhListItem className="flex items-center h-6 ">
+                    <RhListItem className="flex items-center  ">
                       <RhListItem.Icon variant="primary" align="start">
                         {
                           <div className="flex items-center gap-2">
