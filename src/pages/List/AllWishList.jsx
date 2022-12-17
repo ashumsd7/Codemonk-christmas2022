@@ -74,6 +74,7 @@ function AllWishList() {
               🎁 {selectedData?.name} ⁉️ 🎁{" "}
             </h2>
 
+
             {selectedData?.wishList?.length > 0 &&
               selectedData?.wishList?.map((data, index) => {
                 return (
@@ -87,7 +88,7 @@ function AllWishList() {
                             <RhListItem.Text
                               primary={
                                 <p className="button">
-                                  {data || "❓ ❓ ❓ ..."}
+                                  {data || "❌  ( not updated )  ❌ "}
                                 </p>
                               }
                             />
@@ -99,6 +100,8 @@ function AllWishList() {
                   </>
                 );
               })}
+
+
 
             <RhButton
               onClick={() => {

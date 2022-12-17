@@ -41,7 +41,7 @@ function LoginForm({ onSubmitForm, isLoading }) {
               <RhCard className="lg:w-[28rem] w-full p-2 mx-auto border-none">
                 <RhCardBody className="flex flex-col gap-4">
                   <div className="text-2xl font-semibold text-[#ff512f]">
-                    Welcome Monk 🐒, Please Login
+                    Welcome Monk Please Login
                   </div>
                   <div>
                     <RhLabel>Email</RhLabel>

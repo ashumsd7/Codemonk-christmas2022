@@ -144,7 +144,7 @@ function Index() {
               <RhInput
                 // disabled={isLoading}
                 type="text"
-                placeholder="Superstar Kiranraj"
+                placeholder=" Who is your secret monk ?"
                 className="py-4 px-6"
                 value={searchFilter}
                 disabled={!isLoggedIn()}
@@ -308,7 +308,7 @@ function Index() {
                               <RhListItem.Text
                                 primary={
                                   <p className="button">
-                                    {data || "❓ ❓ ❓ ..."}
+                                    {data || " ❌  ( not updated )  ❌ "}
                                   </p>
                                 }
                               />
