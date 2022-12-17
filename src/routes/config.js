@@ -23,11 +23,4 @@ export const pageRoutes = [
     public: true,
     component: lazy(() => import("../pages/List/AllWishList")),
   },
-
-  {
-    path: "/update-mywish/",
-    public: true,
-    component: lazy(() => import("../pages/List/UpdateMyWish")),
-  },
-
 ];

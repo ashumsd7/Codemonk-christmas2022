@@ -21,6 +21,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { useGetUsersQuery, usePatchUserMutation } from "../../services/api";
 import { getTokenData, isLoggedIn, logOut } from "../../utils";
+import car_image from "../../assets/car.svg";
 
 function Index() {
   const { data: employees = [] } = useGetUsersQuery();
@@ -54,7 +55,8 @@ function Index() {
 
   const onSubmitWish = (data) => {
     updateProfile({ wishList: data.wishList }).then(() => {
-      RhToast.success("Updated!!!");
+      RhToast.success(" Hurrah updated 🎉!!!");
+      setIsInviteFormOpen(false);
     });
   };
   return (
@@ -66,7 +68,7 @@ function Index() {
             layout="link"
             onClick={() => setIsInviteFormOpen(true)}
           >
-            <RhIcon icon="mdi:pencil"></RhIcon> <span>Edit your wish</span>
+            <RhIcon icon="mdi:pencil"></RhIcon> <span>Edit my wish</span>
           </RhButton>
         )}
         {isLoggedIn() ? (
@@ -140,7 +142,9 @@ function Index() {
 
                         <RhListItem.Text
                           primary={
-                            <p className="button text-white font-semibold">{item?.name}</p>
+                            <p className="button text-white font-semibold">
+                              {item?.name}
+                            </p>
                           }
                           secondary={item?.email}
                         />
@@ -164,6 +168,8 @@ function Index() {
           <h2> 🎁 Update Wish List 🎁</h2>
           <span>{currentEmployee?.name}</span>
 
+          <RhDivider></RhDivider>
+
           <Formik
             initialValues={currentEmployee}
             enableReinitialize
@@ -172,9 +178,10 @@ function Index() {
             {({ values }) => (
               <Form>
                 <div>
-                  {values.wishList?.map((wish, index) => (
+                  {values?.wishList?.map((wish, index) => (
                     <RhInputFormik
                       block
+                      required
                       label="Wishlist 1"
                       type="text"
                       name={`wishList[${index}]`}
@@ -185,6 +192,7 @@ function Index() {
                   <div className="flex justify-between my-5">
                     <RhButton
                       // disabled={isSendingRequest}
+
                       layout="link"
                       onClick={() => {
                         setIsInviteFormOpen(false);
@@ -194,10 +202,10 @@ function Index() {
                     </RhButton>
                     <RhButton
                       type="submit"
-                      // disabled={isSendingRequest}
+                      disabled={isLoading}
                       variant="primary"
                     >
-                      {false ? <RhLoader /> : "Update Wish "}
+                      {isLoading ? "Updating...." : "Update Wish 🚀"}
                     </RhButton>
                   </div>
                 </div>
@@ -216,7 +224,10 @@ function Index() {
           }}
         >
           <div className="flex justify-between">
-            <h2> {showingData?.name}</h2>
+            <h2 className="lg:text-xl text-sm text-center w-full">
+              {" "}
+              🎁 {showingData?.name} ⁉️{" "}  🎁 
+            </h2>
             {loggedInUser?.id == showingData?._id && (
               <RhIcon
                 className="bg-blue-500 p-2 cursor-pointer rounded-full text-white shadow-md"
@@ -228,40 +239,63 @@ function Index() {
               ></RhIcon>
             )}
           </div>
-          <RhDivider></RhDivider>
-          {currentEmployee?.wishList?.length > 0 &&
-            currentEmployee?.wishList?.map((data, index) => {
-              return (
-                <>
-                  <RhListItem className="flex items-center ">
-                    <RhListItem.Icon variant="primary" align="start">
-                      {
-                        <div className="flex items-center gap-2">
-                          <span className="font-extrabold">{index + 1}</span>{" "}
-                          <RhAvatar
-                            // type={data?.receiver?.image ? "image" : "text"}
-                            // src={data?.receiver?.image}
-                            size="sm"
-                            name={"data?.receiver?.name"}
-                          ></RhAvatar>
-                          <RhListItem.Text
-                            primary={<p className="button">{data}</p>}
-                          />
-                        </div>
-                      }
-                    </RhListItem.Icon>
-                  </RhListItem>
-                  <RhDivider></RhDivider>
-                </>
-              );
-            })}
+
+          <div className="">
+            <div className="flex justify-center items-center">
+              <img
+                src={car_image}
+                alt=""
+                className="lg:h-32 lg:w-32 h-12 w-12"
+              />
+              <img
+                src={car_image}
+                alt=""
+                className="lg:h-32 lg:w-32 h-12 w-12"
+              />
+              <img
+                src={car_image}
+                alt=""
+                className="lg:h-32 lg:w-32 h-12 w-12"
+              />
+            </div>
+            <RhDivider></RhDivider>
+            {showingData?.wishList?.length > 0 &&
+              showingData?.wishList?.map((data, index) => {
+                return (
+                  <>
+                    <div className="">
+                      <RhListItem className="flex items-center h-8 my-1 ">
+                        <RhListItem.Icon variant="primary" align="start">
+                          {
+                            <div className="flex items-center gap-2">
+                              {/* <span className="font-extrabold">{index + 1}</span>  */}
+                              🎉🎁
+                              <RhListItem.Text
+                                primary={
+                                  <p className="button">
+                                    {data || "❓ ❓ ❓ ..."}
+                                  </p>
+                                }
+                              />
+                            </div>
+                          }
+                        </RhListItem.Icon>
+                      </RhListItem>
+                    </div>
+
+                    <RhDivider></RhDivider>
+                  </>
+                );
+              })}
+          </div>
           <div className="flex justify-end">
             <RhButton
               onClick={() => {
                 setIsOpen(false);
               }}
+              disabled={isLoading}
             >
-              Theek hai yaar 👌
+              ok Kool 👌
             </RhButton>
           </div>
         </RhDialog>

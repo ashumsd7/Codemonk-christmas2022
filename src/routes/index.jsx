@@ -9,7 +9,7 @@ import {
 import { DefaultLayout } from "../layouts";
 import { DefaultRoute, pageRoutes } from "./config";
 import { getTokenData, isLoggedIn } from "../utils";
-import NotFound from "../common/base/NotFound";
+import NotFound from "../pages/NotFound";
 // import { useGetUserByIdQuery } from "../services/api";
 import { RhToast } from "@rhythm-ui/react";
 
