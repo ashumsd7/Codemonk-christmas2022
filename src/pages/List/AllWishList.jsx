@@ -18,6 +18,7 @@ import codemonk_logo from "../../assets/logocodemonk.png";
 import bells from "../../assets/bells.jpg";
 import bellshanging from "../../assets/bellhanging2.gif";
 import bellshanging2 from "../../assets/bellhanging.gif";
+import bell from "../../assets/bell.gif";
 
 function AllWishList() {
   const navigate = useNavigate();
@@ -40,31 +41,30 @@ function AllWishList() {
         </RhButton>
 
         <img
-          className="h-22 absolute -top-4 right-10 z-30 animate-pulse "
-          src={bellshanging2}
+          className="h-24 absolute top-10 right-0 z-30 animate-pulse "
+          src={bell}
           alt=""
         />
-        <img
+        {/* <img
           className="h-22 absolute -top-4 left-10 z-30 animate-pulse "
-          src={bellshanging2}
+          src={bell}
           alt=""
-        />
+        /> */}
       </div>
       <marquee behavior="" loop direction="">
         <div className=" bg-gradient-to-r py-1 px-4  from-[#ff512f] to-[#dd2476] text-white rounded-md font-extrabold">
-          🎉 🎁 Merry Christmas 🎉 🎁 📣 Click the card to show more info like
-          address : 📣 Missing Address or any help contact Ashu 👋 : 🎉 🎁 Merry
-          Christmas 🎉 🎁🎉 🎁 Merry Christmas 🎉
+          📣 Click the card to show more info like address : 📣 Missing Address
+          or any help contact Ashu 👋 : 🎉 🎁 Merry Christmas
         </div>
       </marquee>
 
-      <RhScrollbar className=" h-[90vh] flex justi items-center border lg:mt-0 lg:m-10 m-2 p-2 lg:p-10 lg:pt-0">
-        <div className="p-4 h-screen">
+      <RhScrollbar className=" h-[90vh]  flex justi items-center border lg:mt-0 lg:m-10 m-2 p-2 lg:p-10 lg:pt-0">
+        <div className="p-4 h-screen mb-20">
           <h1 className="text-center lg:text-4xl text-xl mb-4 text-[#ff512f]">
             🎉 🎁 Merry Christmas 🎉 🎁{" "}
           </h1>
 
-          <div className=" grid lg:grid-cols-4 gap-3 grid-cols-1">
+          <div className=" grid lg:grid-cols-4 gap-3 grid-cols-1 mb-20">
             {employees?.map((item) => {
               return (
                 <RhCard
@@ -135,7 +135,7 @@ function AllWishList() {
                             </RhIcon>{" "}
                             <div className="text-white text-sm font-bold animate-pulse">
                               {" "}
-                              Address
+                              Click to see Address
                             </div>
                           </>
                         </CopyToClipboard>
