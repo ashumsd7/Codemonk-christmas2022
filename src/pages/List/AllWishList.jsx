@@ -35,7 +35,7 @@ function AllWishList() {
         </RhButton>
       </div>
 
-      <RhScrollbar className=" h-[90vh] flex justi items-center border lg:m-10 m-5  p-5 lg:p-10">
+      <RhScrollbar className=" h-[90vh] flex justi items-center border lg:m-10 m-2 p-2 lg:p-10">
         <div className="p-4 h-screen">
           <h1 className="text-center lg:text-4xl text-xl mb-4">
             🎉 🎁 Merry Christmas 🎉 🎁{" "}

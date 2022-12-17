@@ -109,14 +109,14 @@ function Index() {
         {/* <div className=""></div> */}
       </div>
       {isLoggedIn() && (
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           <RhButton
-            className=" flex ml-2 lg:h-16 h-8  animate-bounce text-white  bg-[#ff512f] hover:bg-red-500 justify-center gap-2 items-center"
+            className=" flex ml-2 lg:h-16 h-8   animate-bounce text-white  bg-[#ff512f] hover:bg-red-500 justify-center gap-2 items-center"
             // layout="link"
             onClick={() => navigate("/wishlist")}
           >
             <RhIcon icon="mdi:eye"></RhIcon>{" "}
-            <span className="font-extrabold lg:text-xl text-sm ">
+            <span className="font-extrabold lg:text-xl text-sm  ">
               See wishlist of all Monks
             </span>
           </RhButton>
