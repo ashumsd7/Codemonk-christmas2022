@@ -17,6 +17,7 @@ import { useGetUsersQuery } from "../../services/api";
 import codemonk_logo from "../../assets/logocodemonk.png";
 import bells from "../../assets/bells.jpg";
 import bellshanging from "../../assets/bellhanging2.gif";
+import bellshanging2 from "../../assets/bellhanging.gif";
 
 function AllWishList() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function AllWishList() {
 
   return (
     <>
-      <div className="flex justify-between text-xl text-[#ff512f]">
+      <div className="flex justify-between text-xl text-[#ff512f] relative ">
         <RhButton
           variant="link"
           onClick={() => {
@@ -37,6 +38,17 @@ function AllWishList() {
           <RhIcon icon="material-symbols:arrow-back-rounded"> </RhIcon> Back to
           home
         </RhButton>
+
+        <img
+          className="h-22 absolute -top-4 right-10 z-30 animate-pulse "
+          src={bellshanging2}
+          alt=""
+        />
+        <img
+          className="h-22 absolute -top-4 left-10 z-30 animate-pulse "
+          src={bellshanging2}
+          alt=""
+        />
       </div>
       <marquee behavior="" loop direction="">
         <div className=" bg-gradient-to-r py-1 px-4  from-[#ff512f] to-[#dd2476] text-white rounded-md font-extrabold">
@@ -70,7 +82,10 @@ function AllWishList() {
                     {/* name */}
                     <div className=" my-2 gap-1 cursor-pointer text-left text-2xl flex items-center font-extrabold hover:font-extrabold text-white">
                       {item?.address && (
-                        <RhIcon icon="mdi:tick-decagram" className="text-white animate-pulse duration-1000">
+                        <RhIcon
+                          icon="mdi:tick-decagram"
+                          className="text-white animate-pulse duration-1000"
+                        >
                           {" "}
                         </RhIcon>
                       )}
