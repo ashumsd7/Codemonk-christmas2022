@@ -31,7 +31,7 @@ export const mainApi = createApi({
         url: `/profile`,
         body,
       }),
-      invalidatesTags: ["mentor"],
+      invalidatesTags: ["connections"],
       onQueryStarted(_, { queryFulfilled }) {
         queryFulfilled.catch((err) =>
           RhToast.error(err.error || "Failed to update user")

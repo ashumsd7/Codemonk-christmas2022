@@ -29,7 +29,7 @@ function AllWishList() {
             navigate("/");
           }}
         >
-          Back to home {employees?.length}
+          Back to home 
         </RhButton>
       </div>
 
@@ -105,7 +105,7 @@ function AllWishList() {
                 setIsOpen(false);
               }}
             >
-              ok Kool 👌
+              Ok Kool 👌
             </RhButton>
           </RhDialog>
         </div>

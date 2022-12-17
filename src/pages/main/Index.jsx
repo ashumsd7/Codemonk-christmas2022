@@ -57,8 +57,9 @@ function Index() {
 
   const onSubmitWish = (data) => {
     updateProfile({ wishList: data.wishList }).then(() => {
-      RhToast.success(" Hurrah updated 🎉!!!");
+      RhToast.success(" Hurrah updated 🎉");
       setIsInviteFormOpen(false);
+      window.location.reload();
     });
   };
   return (
@@ -67,7 +68,7 @@ function Index() {
         {isLoggedIn() && (
           <>
             <RhButton
-              className=" flex text-[#ff512f]   bg-white justify-center gap-2 items-center"
+              className=" flex text-[#ff512f] hover:bg-red-500 hover:text-white  bg-white justify-center gap-2 items-center"
               // layout="link"
               onClick={() => setIsInviteFormOpen(true)}
             >
@@ -77,15 +78,18 @@ function Index() {
         )}
         {isLoggedIn() ? (
           <RhTooltip title="Logout" position="left">
-            <RhAvatar
+            <RhButton
               name={loggedInUser?.name}
-              type="image"
+              // type="image"
               onClick={() => {
                 logOut();
               }}
-              className="hover:rotate-180 duration-200 ease-in cursor-pointer hover:scale-75"
-              src="https://m.media-amazon.com/images/I/51Gb8GLccNL._SY450_.jpg"
-            ></RhAvatar>
+              rounded
+              className="hover:rotate-180 h-8 w-8 rounded-full bg-red-500 hover:bg-red-500 duration-200 ease-in cursor-pointer hover:scale-75"
+              // src="https://m.media-amazon.com/images/I/51Gb8GLccNL._SY450_.jpg"
+            >
+              <RhIcon icon="mdi:logout"></RhIcon>
+            </RhButton>
           </RhTooltip>
         ) : (
           <RhButton
@@ -213,7 +217,7 @@ function Index() {
                     <RhInputFormik
                       block
                       required
-                      label="Wishlist 1"
+                      label="Wishlist"
                       type="text"
                       name={`wishList[${index}]`}
                       className=" "
@@ -236,7 +240,7 @@ function Index() {
                       disabled={isLoading}
                       variant="primary"
                     >
-                      {isLoading ? "Updating...." : "Update Wish 🚀"}
+                      {isLoading ? "Updating...." : "Update Wishlist 🚀"}
                     </RhButton>
                   </div>
                 </div>
@@ -326,7 +330,7 @@ function Index() {
               }}
               disabled={isLoading}
             >
-              ok Kool 👌
+              Ok Kool 👌
             </RhButton>
           </div>
         </RhDialog>
