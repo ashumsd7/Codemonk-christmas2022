@@ -140,7 +140,7 @@ function Index() {
               <RhInput
                 // disabled={isLoading}
                 type="text"
-                placeholder="Kiranraj"
+                placeholder="Superstar Kiranraj"
                 className="py-4 px-6"
                 value={searchFilter}
                 disabled={!isLoggedIn()}
