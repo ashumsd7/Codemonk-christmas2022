@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
+    "react-scratchcard": "^1.1.2",
     "react-select": "^5.4.0",
     "react-simple-image-viewer": "^1.2.2",
     "react-web-share": "^2.0.2",

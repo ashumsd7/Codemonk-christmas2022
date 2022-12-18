@@ -27,9 +27,12 @@ import car_image from "../../assets/car.svg";
 import codemonk_logo from "../../assets/logocodemonk.png";
 import running from "../../assets/running.gif";
 import bellshanging from "../../assets/bellhanging2.gif";
+import santapoint from "../../assets/santapoint.jpg";
+
 // import DateCountdown from "react-date-countdown-timer";
 import cap from "../../assets/cap.png";
 import ReactAudioPlayer from "react-audio-player";
+import { use } from "echarts";
 
 function Index() {
   const { data: employees = [] } = useGetUsersQuery();
@@ -40,6 +43,8 @@ function Index() {
   );
 
   const [searchFilter, setSearchFilter] = useState("");
+  const [isShowingLink, setIsShowingLink] = useState(false);
+  const [isAdOpen, setIsAdOpen] = useState(false);
   const navigate = useNavigate();
   const [isInviteFormOpen, setIsInviteFormOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +52,11 @@ function Index() {
   const [showingData, setShowingData] = useState({});
   const [filteredEmployees, setFilteredEmployees] = useState([]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsAdOpen(true);
+    }, 3000);
+  }, []);
   useEffect(() => {
     const allFilteredData = employees?.filter((item) => {
       if (
@@ -69,9 +79,6 @@ function Index() {
     });
   };
 
-  // setInterval(() => {
-  //   RhToast.info("Someone has updated wish list");
-  // }, 5000);
   return (
     <div className=" h-screen relative bg-no-repeat bg-cover w-full   bg-[url('https://wallpaper.dog/large/10732913.jpg')]">
       <div className="backdrop-blur-sm h-full">
@@ -109,27 +116,16 @@ function Index() {
           ) : (
             <></>
           )}
-          {/* </div> */}
-          {/* <div className=""></div> */}
         </div>
-
-        {/* <div className="ml-4 text-white font-bold text-xl text-right">
-                  <DateCountdown
-                    className="text-red-500 "
-                    dateTo="December 23, 2022 16:00:00 GMT+05:30"
-                    callback={() => alert("Hello")}
-                  />{" "}
-                  left..
-                </div> */}
 
         <div className="grid h-full lg:grid-cols-2 grid-cols-1">
           <div className="flex justify-center items-center mt-10 lg:mt-5 leading-5">
             <div className="font-extrabold flex flex-col gap-4">
-           
               <div className="relative">
-               
-                <h1 className="lg:text-8xl text-4xl  text-white ">
-                  <span className="text-red-500 relative lg:-right-5 -right-1 ">C</span>{" "}
+                <h1 className="lg:text-8xl text-5xl drop-shadow-lg  text-white ">
+                  <span className="text-red-500 relative lg:-right-5 -right-1 ">
+                    C
+                  </span>{" "}
                   ODEMONK
                 </h1>
                 <p className="text-right font-rubik mb-2 text-white">
@@ -545,6 +541,62 @@ function Index() {
                 >
                   Ok Got it
                 </RhButton>
+              </div>
+            </RhDialog>
+
+            <RhDialog
+              className=" flex flex-col gap-6  w-[90vw] sm:w-[50vw]"
+              isOpen={isAdOpen}
+              onClose={() => {
+                // setShowingData({});
+                setIsAdOpen(false);
+              }}
+            >
+              <div className="p-2 border-0">
+                {/* <RhCardBody> */}
+                <div className="flex justify-between">
+                  <div className="">
+                    <img className="w-24" src={codemonk_logo} alt="" />
+                  </div>
+                  <div
+                    className="cursor-pointer hover:rotate-180 duration-100"
+                    onClick={() => {
+                      setIsAdOpen(false);
+                    }}
+                  >
+                    ❌
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <img className="lg:w-44 w-28" src={santapoint} alt="" />
+                  <div className="flex flex-col gap-4 justify-center items-center">
+                    <h1 className="text-lg lg:text-4xl font-rubik text-[#ff512f]">
+                      Remembered the Date ?
+                    </h1>
+                    <h2 className="text-sm lg:text-3xl">
+                      23rd December 2023 @4PM{" "}
+                    </h2>
+                    {/* <div className="relative w-full m-auto"> */}
+                    <div
+                      onClick={() => {
+                        setIsShowingLink(true);
+                      }}
+                      className="bg-[#ff512f] hover:translate-x-10 hover:-translate-x-10 duration-75  w-[70%] cursor-pointer py-1 px-3 text-white font-extralight  border border-dotted flex justify-center items-center"
+                    >
+                      {!isShowingLink ? (
+                        " REVEAL LINK"
+                      ) : (
+                        <>
+                          <span className="text-black font-extrabold">
+                            COMING SOON
+                          </span>
+                        </>
+                      )}
+                    </div>
+
+                    {/* </div> */}
+                  </div>
+                </div>
               </div>
             </RhDialog>
           </div>
