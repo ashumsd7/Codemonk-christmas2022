@@ -574,7 +574,7 @@ function Index() {
                       Remembered the Date ?
                     </h1>
                     <h2 className="text-sm lg:text-3xl">
-                      23rd December 2023 @4PM{" "}
+                      23rd December 2022 @4PM{" "}
                     </h2>
                     {/* <div className="relative w-full m-auto"> */}
                     <div
@@ -588,7 +588,7 @@ function Index() {
                       ) : (
                         <>
                           <span className="text-black font-extrabold">
-                             WAIT 👋
+                            WAIT 👋
                           </span>
                         </>
                       )}
