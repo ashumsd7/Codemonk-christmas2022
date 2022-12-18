@@ -38,6 +38,7 @@ function Index() {
     (employee) => employee._id == loggedInUser.id
   );
 
+
   const [searchFilter, setSearchFilter] = useState("");
   const navigate = useNavigate();
   const [isInviteFormOpen, setIsInviteFormOpen] = useState(false);
@@ -180,6 +181,9 @@ function Index() {
                           🎁{" "}
                           {data.link ? (
                             <a
+                              onClick={(e) => {
+                                e.stopPropagation();
+                              }}
                               target="_blank"
                               className="cursor-pointer text-white  font-semibold"
                               href={data.link}

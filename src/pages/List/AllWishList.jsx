@@ -47,7 +47,7 @@ function AllWishList() {
           src={bell}
           alt=""
         />
-          <img
+        <img
           className="h-24 absolute top-10 left-0 rotate-0 z-30 animate-pulse "
           src={bell}
           alt=""
@@ -118,6 +118,9 @@ function AllWishList() {
                             {data.link ? (
                               <a
                                 target="_blank"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                }}
                                 className="cursor-pointer text-white  font-semibold"
                                 href={data.link}
                               >

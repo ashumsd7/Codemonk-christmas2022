@@ -46,10 +46,7 @@ export const mainApi = createApi({
         params,
       }),
       providesTags: ["connections"],
-      transformResponse: (data) => {
-        console.log(data, "all data");
-        return data;
-      },
+      transformResponse: (data) => data.sort((a,b) => a.name > b.name ? 1 : -1),
       onQueryStarted(_, { queryFulfilled }) {
         queryFulfilled.catch(() =>
           RhToast.info("Login to see and add wishlist")
