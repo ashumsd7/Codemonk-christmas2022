@@ -27,7 +27,7 @@ import car_image from "../../assets/car.svg";
 import codemonk_logo from "../../assets/logocodemonk.png";
 import running from "../../assets/running.gif";
 import bellshanging from "../../assets/bellhanging2.gif";
-import DateCountdown from "react-date-countdown-timer";
+// import DateCountdown from "react-date-countdown-timer";
 import cap from "../../assets/cap.png";
 import ReactAudioPlayer from "react-audio-player";
 
@@ -113,14 +113,14 @@ function Index() {
           {/* <div className=""></div> */}
         </div>
 
-        <div className="ml-4 text-white font-bold text-xl text-right">
+        {/* <div className="ml-4 text-white font-bold text-xl text-right">
                   <DateCountdown
                     className="text-red-500 "
                     dateTo="December 23, 2022 16:00:00 GMT+05:30"
                     callback={() => alert("Hello")}
                   />{" "}
                   left..
-                </div>
+                </div> */}
 
         <div className="grid h-full lg:grid-cols-2 grid-cols-1">
           <div className="flex justify-center items-center mt-10 lg:mt-5 leading-5">
