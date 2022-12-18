@@ -205,7 +205,7 @@ function Index() {
                   <p className="flex items-center justify-end gap-1 reltive">
                     {currentEmployee?.address?.length > 5 && (
                       <CopyToClipboard
-                        text={item?.address}
+                        text={currentEmployee?.address}
                         onCopy={(e) => {
                           RhToast.success("Address copied.");
                         }}
