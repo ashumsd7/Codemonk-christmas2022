@@ -27,6 +27,7 @@ import car_image from "../../assets/car.svg";
 import codemonk_logo from "../../assets/logocodemonk.png";
 import running from "../../assets/running.gif";
 import bellshanging from "../../assets/bellhanging2.gif";
+import DateCountdown from "react-date-countdown-timer";
 import cap from "../../assets/cap.png";
 import ReactAudioPlayer from "react-audio-player";
 
@@ -37,7 +38,6 @@ function Index() {
   const currentEmployee = employees.find(
     (employee) => employee._id == loggedInUser.id
   );
-
 
   const [searchFilter, setSearchFilter] = useState("");
   const navigate = useNavigate();
@@ -113,22 +113,34 @@ function Index() {
           {/* <div className=""></div> */}
         </div>
 
+        <div className="ml-4 text-white font-bold text-xl text-right">
+                  <DateCountdown
+                    className="text-red-500 "
+                    dateTo="December 23, 2022 16:00:00 GMT+05:30"
+                    callback={() => alert("Hello")}
+                  />{" "}
+                  left..
+                </div>
+
         <div className="grid h-full lg:grid-cols-2 grid-cols-1">
           <div className="flex justify-center items-center mt-10 lg:mt-5 leading-5">
             <div className="font-extrabold flex flex-col gap-4">
+           
               <div className="relative">
+               
                 <h1 className="lg:text-8xl text-4xl  text-white ">
-                  <span className="text-red-500 relative -right-3 ">C</span>{" "}
+                  <span className="text-red-500 relative lg:-right-5 -right-1 ">C</span>{" "}
                   ODEMONK
                 </h1>
-                <p className="text-right font-rubik text-white">
+                <p className="text-right font-rubik mb-2 text-white">
                   celebrating christmas 2022
                 </p>
-                <p className="text-right text-xs text-red-300">
+                <p className="text-right text-xs text-red-400">
                   Friday, 23rd Dec. 4:00 PM
                 </p>
+
                 <img
-                  className="absolute lg:-top-4 -top-3 lg:w-20 w-10 lg:-left-3 left-0 -translate-x-5 -rotate-45"
+                  className="absolute lg:-top-2 -top-1 lg:w-20 w-10 lg:-left-0  left-1 lg:-translate-x-2 -translate-x-4 -rotate-45"
                   src={cap}
                   alt=""
                 />
