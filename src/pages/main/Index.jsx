@@ -568,7 +568,7 @@ function Index() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <img className="lg:w-44 w-28" src={santapoint} alt="" />
+                  <img className="lg:w-44 w-32" src={santapoint} alt="" />
                   <div className="flex flex-col gap-4 justify-center items-center">
                     <h1 className="text-lg lg:text-4xl font-rubik text-[#ff512f]">
                       Remembered the Date ?
@@ -577,7 +577,7 @@ function Index() {
                       23rd December 2022 @4PM{" "}
                     </h2>
                     {/* <div className="relative w-full m-auto"> */}
-                    <div
+                    {/* <div
                       onClick={() => {
                         setIsShowingLink(true);
                       }}
@@ -592,7 +592,7 @@ function Index() {
                           </span>
                         </>
                       )}
-                    </div>
+                    </div> */}
 
                     {/* </div> */}
                   </div>
