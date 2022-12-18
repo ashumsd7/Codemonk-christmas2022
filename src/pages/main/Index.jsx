@@ -588,7 +588,7 @@ function Index() {
                       ) : (
                         <>
                           <span className="text-black font-extrabold">
-                            COMING SOON
+                             WAIT 👋
                           </span>
                         </>
                       )}
