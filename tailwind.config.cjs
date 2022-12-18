@@ -210,6 +210,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["DM Sans", ...defaultTheme.fontFamily.sans],
+        rubik: ["Pacifico", ...defaultTheme.fontFamily.sans],
       },
       selectStyles: {
         background: colors.white,
