@@ -51,12 +51,21 @@ function Index() {
   const [updateProfile, { isLoading }] = usePatchUserMutation();
   const [showingData, setShowingData] = useState({});
   const [filteredEmployees, setFilteredEmployees] = useState([]);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     setTimeout(() => {
       setIsAdOpen(true);
     }, 3000);
   }, []);
+
+  useEffect(() => {
+    if (count == 10) {
+      if (isLoggedIn()) {
+        setIsInviteFormOpen(true);
+      }
+    }
+  }, [count]);
   useEffect(() => {
     const allFilteredData = employees?.filter((item) => {
       if (
@@ -136,6 +145,9 @@ function Index() {
                 </p>
 
                 <img
+                  onClick={() => {
+                    setCount((prev) => ++prev);
+                  }}
                   className="absolute lg:-top-2 -top-1 lg:w-20 w-10 lg:-left-0  left-1 lg:-translate-x-2 -translate-x-4 -rotate-45"
                   src={cap}
                   alt=""
@@ -159,7 +171,7 @@ function Index() {
           <div className="flex justify-center flex-col items-center h-full">
             {isLoggedIn() && (
               <RhCard
-                onClick={() => setIsInviteFormOpen(true)}
+                // onClick={() => setIsInviteFormOpen(true)}
                 className="w-[90vw] sm:w-[40vw] p-2 my-4 relative cursor-pointer card-hover hover:scale-105 duration-150 ease-out bg-gradient-to-r  from-[#ff512f] to-[#dd2476]"
               >
                 <div className="flex justify-between animate-pulse">
@@ -267,11 +279,31 @@ function Index() {
                   </div>
 
                   <div
-                    onClick={() => setIsInviteFormOpen(true)}
+                    onClick={() => {
+                      if (currentEmployee?.address?.length >= 5) {
+                        setIsInviteFormOpen(true);
+                      }
+                    }}
                     className="h-10 bg-gradient-to-r w-full gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
                   >
-                    <p className="animate-bounce"> ✏️ </p>
-                    <p className="text-white font-extrabold">Edit My Wishes</p>
+                    {currentEmployee?.address?.length > 2 ? (
+                      <RhTooltip
+                        title="You can't edit now, Contact Admin"
+                        position="bottom"
+                      >
+                        {/* <p className="animate-bounce"> 🔐 </p> */}
+                        <p className="text-white font-extrabold">
+                          🔐 Edit My Wishes
+                        </p>
+                      </RhTooltip>
+                    ) : (
+                      <>
+                        <p className="animate-bounce"> ✏️ </p>
+                        <p className="text-white font-extrabold">
+                          Edit My Wishes
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </>
