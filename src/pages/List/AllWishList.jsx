@@ -121,13 +121,12 @@ function AllWishList() {
                       )}
                       {item?.name}
                     </div>
-                   
                   </div>
                   <div className="">
                     <div className="">
                       <div className=" flex flex-col justify-center gap-1 items-center my-4">
                         <p className="text-white text-xl mb-2">
-                          is gueesing
+                          has guessed
                           <span className="animate-bounce "> </span>
                         </p>
 
@@ -139,7 +138,9 @@ function AllWishList() {
                         </h2>
 
                         <h4 className="text-white">as secret monk</h4>
-                        <p className="text-sm font-thin text-gray-100 ">{item.isGiftReceived ? "  &  Received the gift." : ""}</p>
+                        <p className="text-sm font-thin text-gray-100 ">
+                          {item.isGiftReceived ? "  &  Received the gift." : ""}
+                        </p>
                       </div>
                       {/* {item?.wishes?.map((data) => {
                         return (
@@ -194,7 +195,6 @@ function AllWishList() {
                             <div className="text-white text-sm flex items-center gap-2 font-bold animate-pulse">
                               {" "}
                               Click to see more details{" "}
-                             
                             </div>
                           </>
                         </CopyToClipboard>

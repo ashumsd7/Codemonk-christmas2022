@@ -233,24 +233,14 @@ function Index() {
                 <RhDivider></RhDivider>
                 <div className="flex flex-col justify-between items-">
                   {/* name */}
-                  <div className=" my-2 gap-1 cursor-pointer text-left text-2xl flex items-center font-extrabold hover:font-extrabold text-white">
-                    {currentEmployee?.address && (
-                      <RhIcon
-                        icon="mdi:tick-decagram"
-                        className="bg-white text-blue-500   p-[2px] rounded-full animate-pulse duration-1000"
-                      >
-                        {" "}
-                      </RhIcon>
-                    )}
-                    {currentEmployee?.name}
-                  </div>
+                  <div className=" my-2 gap-1 cursor-pointer text-left text-2xl flex items-center font-extrabold hover:font-extrabold text-white"></div>
                 </div>
                 <div>
-                  <div className="h-full">
-                    <div className="h-full flex flex-col gap-3 justify-center items-center my-4">
+                  <div className="">
+                    <div className=" flex flex-col gap-3 justify-center items-center my-4">
                       <p className="text-white text-xl mb-2">
-                        is gueesing
-                        <span className="animate-bounce "> 🤔</span>
+                        You have guessed
+                        <span className="animate-bounce "> </span>
                       </p>
 
                       <h2>
@@ -261,6 +251,11 @@ function Index() {
                       </h2>
 
                       <h4 className="text-white">as secret monk</h4>
+                      <p className="text-white text-center tracking-wider">
+                        {currentEmployee?.isGiftReceived
+                          ? "& marked , you have received the gift."
+                          : ""}
+                      </p>
                     </div>
 
                     {/* {currentEmployee?.wishes?.map((data) => {
@@ -293,6 +288,13 @@ function Index() {
                         </li>
                       );
                     })} */}
+                    <div
+                      onClick={() => setIsGuessedListOpen(true)}
+                      className=" h-10  text-red-500  gap-2 mt-4  cursor-pointer bg-white   rounded-md flex justify-center items-center"
+                    >
+                      <p className="t font-extrabold">Who guessed me </p>
+                      <p className="animate-bounce"> ❓ </p>
+                    </div>
                   </div>
 
                   <p className="flex items-center justify-end gap-1 reltive">
@@ -369,14 +371,47 @@ function Index() {
                     )} */}
                   </div>
                 </div>
-                <div
-                  onClick={() => setIsGuessedListOpen(true)}
-                  className=" h-10 bg-gradient-to-r w-1/2  gap-2 mt-4  cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
-                >
-                  {/* <p className="animate-bounce"> ❓ </p> */}
-                  <p className="text-white font-extrabold">Who guessed me </p>
-                  <p className="animate-bounce"> ❓ </p>
-                </div>
+
+             <div className="hidden">
+             <div
+                    onClick={() => {
+                      // if (currentEmployee?.address?.length >= 5) {
+                      setIsGifDialogOpen(true);
+                      // }
+                    }}
+                    className="h-10  bg-gradient-to-r w-full animate-pulse gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
+                  >
+                    {/* {currentEmployee?.address?.length > 2 ? ( */}
+                    <RhTooltip title="Guess Your Monk" position="bottom">
+                      {/* <p className="animate-bounce"> 🔐 </p> */}
+                      <p className="text-white font-extrabold">
+                        🤔 Guess your ?
+                      </p>
+                    </RhTooltip>
+
+                
+                  </div>
+
+                  <div
+                    onClick={() => {
+                      // if (currentEmployee?.address?.length >= 5) {
+                      setIsGifDialogOpen(true);
+                      // }
+                    }}
+                    className="h-10 bg-gradient-to-r w-full animate-pulse gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
+                  >
+                    {/* {currentEmployee?.address?.length > 2 ? ( */}
+                    <RhTooltip title="Guess Your Monk" position="bottom">
+                      {/* <p className="animate-bounce"> 🔐 </p> */}
+                      <p className="text-white font-extrabold">
+                        🤔 Guess your ?
+                      </p>
+                    </RhTooltip>
+
+                  
+                  </div>
+             </div>
+
                 {/* */}
               </>
             )}
@@ -532,7 +567,7 @@ function Index() {
 
             {/* //show */}
             <RhDialog
-              className=" flex flex-col gap-6  w-[90vw] sm:w-[60vw]"
+              className=" flex flex-col gap-3  w-[90vw] sm:w-[60vw]"
               isOpen={isOpen}
               onClose={() => {
                 setShowingData({});
@@ -728,9 +763,9 @@ function Index() {
                 </div>
                 <div className="flex gap-2">
                   {!whoGuessedYourList?.length ? (
-                    <img className="lg:w-44 w-32" src={sadSanta} alt="" />
+                    <img className="lg:w-44 w-20" src={sadSanta} alt="" />
                   ) : (
-                    <img className="lg:w-44 w-32" src={happySanta} alt="" />
+                    <img className="lg:w-44 w-20" src={happySanta} alt="" />
                   )}
                   <div className="flex flex-col gap-4 justify-center items-center">
                     {!whoGuessedYourList?.length ? (
@@ -749,14 +784,16 @@ function Index() {
                         </h1>
 
                         {whoGuessedYourList?.map((data) => {
-                          return <p className="text-xl font-semibold tracking-wide">{data.name}</p>;
+                          return (
+                            <p className="text-xl font-semibold tracking-wide">
+                              {data.name}
+                            </p>
+                          );
                         })}
 
                         <p> guessed you as secret santa?</p>
 
-                        <h2 className="text-sm lg:text-xl">
-                          Are you secret monk of these monks ??
-                        </h2>
+                        <h2 className="text-sm lg:text-xl">Really ??</h2>
                       </>
                     )}
                   </div>
@@ -805,6 +842,10 @@ function Index() {
                   options={employees}
                   value={myMonk}
                   onChange={(val) => {
+                    if (currentEmployee?.name == val?.name) {
+                      alert("LOL, You are not your secret monk !!");
+                      return;
+                    }
                     setMyMonk(val);
                   }}
                   placeholder="Guess your monk"
@@ -840,6 +881,7 @@ function Index() {
                     onClick={() => {
                       onConfirmMonk();
                     }}
+                    disabled={isLoading}
                   >
                     Confirm
                   </RhButton>
@@ -850,11 +892,12 @@ function Index() {
         </RhDialog>
 
         {/* //dancing */}
+        <div className="mb-20"></div>
         <div className="absolute bottom-0 right-0">
-          <img className="h-40" src={running}></img>
+          {/* <img className="h-40" src={running}></img> */}
         </div>
         <div className="absolute bottom-0 left-0">
-          <img className="h-40" src={running}></img>
+          {/* <img className="h-40" src={running}></img> */}
         </div>
       </div>
     </div>
