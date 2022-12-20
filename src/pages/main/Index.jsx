@@ -21,6 +21,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
+import gift from "../../assets/giftrec.png";
 import { useGetUsersQuery, usePatchUserMutation } from "../../services/api";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { getTokenData, isLoggedIn, logOut } from "../../utils";
@@ -197,6 +198,36 @@ function Index() {
                   Friday, 23rd Dec. 4:00 PM
                 </p>
 
+                {isLoggedIn() && (
+                  <>
+                    <div className="flex w-[90vw] mt-2 sm:w-[40vw] gap-2 items-center">
+                      <div
+                        onClick={() => navigate("/wishlist")}
+                        className=" h-10 bg-gradient-to-r w-full gap-2  cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
+                      >
+                        <p className="animate-bounce"> 🎁 </p>
+                        <p className="text-white font-extrabold">Wish List</p>
+                      </div>
+
+                      <div
+                        onClick={() => {
+                          setIsGifDialogOpen(true);
+                        }}
+                        className="h-10 bg-gradient-to-r w-full animate-pulse gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
+                      >
+                        <RhTooltip title="Guess Your Monk" position="bottom">
+                          {/* <p className="animate-bounce"> 🔐 </p> */}
+                          <p className="text-white font-extrabold">
+                            🤔 Guess your ?
+                          </p>
+                        </RhTooltip>
+                      </div>
+                    </div>
+
+                    {/* */}
+                  </>
+                )}
+
                 <img
                   // onClick={() => {
                   //   setCount((prev) => ++prev);
@@ -221,7 +252,7 @@ function Index() {
               <h1></h1>
             </div>
           </div>
-          <div className="flex justify-center flex-col items-center h-full">
+          <div className="flex justify-center flex-col items-center ">
             {isLoggedIn() && (
               <RhCard
                 // onClick={() => setIsInviteFormOpen(true)}
@@ -238,6 +269,11 @@ function Index() {
                 <div>
                   <div className="">
                     <div className=" flex flex-col gap-3 justify-center items-center my-4">
+                      <p className="text-white text-center tracking-wider">
+                        {currentEmployee?.isGiftReceived
+                          ? " GIFT RECEIVED &"
+                          : ""}
+                      </p>
                       <p className="text-white text-xl mb-2">
                         You have guessed
                         <span className="animate-bounce "> </span>
@@ -251,43 +287,8 @@ function Index() {
                       </h2>
 
                       <h4 className="text-white">as secret monk</h4>
-                      <p className="text-white text-center tracking-wider">
-                        {currentEmployee?.isGiftReceived
-                          ? "& marked , you have received the gift."
-                          : ""}
-                      </p>
                     </div>
 
-                    {/* {currentEmployee?.wishes?.map((data) => {
-                      return (
-                        <li className="block text-white font-semibold">
-                          {" "}
-                          🎁{" "}
-                          {data.link ? (
-                            <a
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
-                              target="_blank"
-                              className="cursor-pointer text-white  font-semibold"
-                              href={data.link}
-                            >
-                              {data?.title.length > 15
-                                ? data?.title
-                                    ?.split("")
-                                    ?.slice(0, 15)
-                                    .join("") + "..."
-                                : data?.title}
-                            </a>
-                          ) : data?.title.length > 15 ? (
-                            data?.title?.split("")?.slice(0, 15).join("") +
-                            "..."
-                          ) : (
-                            data?.title
-                          )}
-                        </li>
-                      );
-                    })} */}
                     <div
                       onClick={() => setIsGuessedListOpen(true)}
                       className=" h-10  text-red-500  gap-2 mt-4  cursor-pointer bg-white   rounded-md flex justify-center items-center"
@@ -305,18 +306,7 @@ function Index() {
                           RhToast.success("Address copied.");
                         }}
                       >
-                        <>
-                          {/* <RhIcon
-                            icon="mdi:tick-decagram"
-                            className="text-green-500"
-                          >
-                            {" "}
-                          </RhIcon>{" "} */}
-                          {/* <div className="text-white text-sm flex items-center gap-2 font-bold animate-pulse">
-                            {" "}
-                            Click to see wishes..
-                          </div> */}
-                        </>
+                        <></>
                       </CopyToClipboard>
                     )}
                   </p>
@@ -327,94 +317,16 @@ function Index() {
                     <div className=" text-white absolute top-4 z-10 right-1 rotate-45 translate-x-11 bg-gray-800 rounded-md  text-xs font-extrabold w-auto inline-block px-6 py-1">
                       Thank you 🎉
                     </div>
-                    <div className="absolute top-7 animate-pulse right-0 h-16 z-20 flex  ">
-                      <img className="h-24 " src={bellshanging} alt="" />
-                    </div>
+                    {currentEmployee?.isGiftReceived && (
+                      <div className="absolute top-7 animate-pulse right-0 h-16 z-20 flex  ">
+                        <img className="h-24 " src={gift} alt="" />
+                      </div>
+                    )}
                   </>
                 )}
               </RhCard>
             )}
-            {isLoggedIn() && (
-              <>
-                <div className="flex w-[90vw] mt-2 sm:w-[40vw] gap-2 items-center">
-                  <div
-                    onClick={() => navigate("/wishlist")}
-                    className=" h-10 bg-gradient-to-r w-full gap-2  cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
-                  >
-                    <p className="animate-bounce"> 🎁 </p>
-                    <p className="text-white font-extrabold">Wish List</p>
-                  </div>
 
-                  <div
-                    onClick={() => {
-                      // if (currentEmployee?.address?.length >= 5) {
-                      setIsGifDialogOpen(true);
-                      // }
-                    }}
-                    className="h-10 bg-gradient-to-r w-full animate-pulse gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
-                  >
-                    {/* {currentEmployee?.address?.length > 2 ? ( */}
-                    <RhTooltip title="Guess Your Monk" position="bottom">
-                      {/* <p className="animate-bounce"> 🔐 </p> */}
-                      <p className="text-white font-extrabold">
-                        🤔 Guess your ?
-                      </p>
-                    </RhTooltip>
-
-                    {/* ) : (
-                      <>
-                        <p className="animate-bounce"> ✏️ </p>
-                        <p className="text-white font-extrabold">
-                          Edit My Wishes
-                        </p>
-                      </>
-                    )} */}
-                  </div>
-                </div>
-
-             <div className="hidden">
-             <div
-                    onClick={() => {
-                      // if (currentEmployee?.address?.length >= 5) {
-                      setIsGifDialogOpen(true);
-                      // }
-                    }}
-                    className="h-10  bg-gradient-to-r w-full animate-pulse gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
-                  >
-                    {/* {currentEmployee?.address?.length > 2 ? ( */}
-                    <RhTooltip title="Guess Your Monk" position="bottom">
-                      {/* <p className="animate-bounce"> 🔐 </p> */}
-                      <p className="text-white font-extrabold">
-                        🤔 Guess your ?
-                      </p>
-                    </RhTooltip>
-
-                
-                  </div>
-
-                  <div
-                    onClick={() => {
-                      // if (currentEmployee?.address?.length >= 5) {
-                      setIsGifDialogOpen(true);
-                      // }
-                    }}
-                    className="h-10 bg-gradient-to-r w-full animate-pulse gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
-                  >
-                    {/* {currentEmployee?.address?.length > 2 ? ( */}
-                    <RhTooltip title="Guess Your Monk" position="bottom">
-                      {/* <p className="animate-bounce"> 🔐 </p> */}
-                      <p className="text-white font-extrabold">
-                        🤔 Guess your ?
-                      </p>
-                    </RhTooltip>
-
-                  
-                  </div>
-             </div>
-
-                {/* */}
-              </>
-            )}
             {/* <div className="flex justify-center flex-col   flex-wrap ">
        
               {
