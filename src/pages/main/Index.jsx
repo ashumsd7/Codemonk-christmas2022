@@ -13,7 +13,9 @@ import {
   RhListItem,
   RhLoader,
   RhScrollbar,
+  RhSelect,
   RhToast,
+  RhToggle,
   RhTooltip,
 } from "@rhythm-ui/react";
 import React, { useEffect, useState } from "react";
@@ -27,7 +29,9 @@ import car_image from "../../assets/car.svg";
 import codemonk_logo from "../../assets/logocodemonk.png";
 import running from "../../assets/running.gif";
 import bellshanging from "../../assets/bellhanging2.gif";
-import santapoint from "../../assets/santapoint.jpg";
+import santapoint from "../../assets/santapoint2.jpg";
+import happySanta from "../../assets/happysanta.jpg";
+import sadSanta from "../../assets/sadsanta.png";
 
 // import DateCountdown from "react-date-countdown-timer";
 import cap from "../../assets/cap.png";
@@ -41,6 +45,28 @@ function Index() {
   const currentEmployee = employees.find(
     (employee) => employee._id == loggedInUser.id
   );
+  console.log(">>>>>>>currentEmployee>>>", currentEmployee);
+
+  const whoGuessedYourList = employees?.filter(
+    (data) => data?.yourMonk == currentEmployee?.name
+  );
+
+  console.log(">>>>>whoGuessedYourList>>>", whoGuessedYourList);
+
+  let yourMonk = employees?.find(
+    (employee) => employee.name == currentEmployee?.yourMonk
+  );
+
+  // const yourMonk;
+  useEffect(() => {
+    let guessedMonk = employees?.find(
+      (employee) => employee.name == currentEmployee?.yourMonk
+    );
+    setMyMonk(guessedMonk);
+    setIsReceived(currentEmployee?.isGiftReceived);
+  }, [yourMonk]);
+
+  console.log(">>>>>>guessedMonk>>>>>>", yourMonk);
 
   const [searchFilter, setSearchFilter] = useState("");
   const [isShowingLink, setIsShowingLink] = useState(false);
@@ -52,11 +78,23 @@ function Index() {
   const [showingData, setShowingData] = useState({});
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [count, setCount] = useState(0);
+  const [isGifDialogOpen, setIsGifDialogOpen] = useState(false);
+  const [isReceived, setIsReceived] = useState(currentEmployee?.isGiftReceived);
+  const [myMonk, setMyMonk] = useState({});
+  const [isGuessedListOpen, setIsGuessedListOpen] = useState(false);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsAdOpen(true);
+  //   }, 3000);
+  // }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsAdOpen(true);
-    }, 3000);
+    if (isLoggedIn()) {
+      setTimeout(() => {
+        setIsGuessedListOpen(true);
+      }, 3000);
+    }
   }, []);
 
   useEffect(() => {
@@ -77,6 +115,21 @@ function Index() {
 
     setFilteredEmployees(allFilteredData);
   }, [searchFilter]);
+
+  const onConfirmMonk = (data) => {
+    console.log(">>>>>>>>>>>", {
+      isGiftReceived: isReceived,
+      yourMonk: myMonk?.name,
+    });
+    // return;
+    updateProfile({ isGiftReceived: isReceived, yourMonk: myMonk?.name }).then(
+      () => {
+        RhToast.success("  Thank you.");
+        // setIsInviteFormOpen(false);
+        window.location.reload();
+      }
+    );
+  };
 
   const initialValues = {};
 
@@ -145,9 +198,9 @@ function Index() {
                 </p>
 
                 <img
-                  onClick={() => {
-                    setCount((prev) => ++prev);
-                  }}
+                  // onClick={() => {
+                  //   setCount((prev) => ++prev);
+                  // }}
                   className="absolute lg:-top-2 -top-1 lg:w-20 w-10 lg:-left-0  left-1 lg:-translate-x-2 -translate-x-4 -rotate-45"
                   src={cap}
                   alt=""
@@ -184,7 +237,7 @@ function Index() {
                     {currentEmployee?.address && (
                       <RhIcon
                         icon="mdi:tick-decagram"
-                        className="bg-white text-blue-500  p-[2px] rounded-full animate-pulse duration-1000"
+                        className="bg-white text-blue-500   p-[2px] rounded-full animate-pulse duration-1000"
                       >
                         {" "}
                       </RhIcon>
@@ -193,8 +246,24 @@ function Index() {
                   </div>
                 </div>
                 <div>
-                  <div className="">
-                    {currentEmployee?.wishes?.map((data) => {
+                  <div className="h-full">
+                    <div className="h-full flex flex-col gap-3 justify-center items-center my-4">
+                      <p className="text-white text-xl mb-2">
+                        is gueesing
+                        <span className="animate-bounce "> 🤔</span>
+                      </p>
+
+                      <h2>
+                        {" "}
+                        <span className="lg:text-4xl  text-2xl text-center mb-2 font-extrabold tracking-wider animate-bounce ">
+                          {currentEmployee?.yourMonk || "---------"}
+                        </span>
+                      </h2>
+
+                      <h4 className="text-white">as secret monk</h4>
+                    </div>
+
+                    {/* {currentEmployee?.wishes?.map((data) => {
                       return (
                         <li className="block text-white font-semibold">
                           {" "}
@@ -223,7 +292,7 @@ function Index() {
                           )}
                         </li>
                       );
-                    })}
+                    })} */}
                   </div>
 
                   <p className="flex items-center justify-end gap-1 reltive">
@@ -235,20 +304,16 @@ function Index() {
                         }}
                       >
                         <>
-                          <RhIcon
+                          {/* <RhIcon
                             icon="mdi:tick-decagram"
                             className="text-green-500"
                           >
                             {" "}
-                          </RhIcon>{" "}
-                          <div className="text-white text-sm flex items-center gap-2 font-bold animate-pulse">
+                          </RhIcon>{" "} */}
+                          {/* <div className="text-white text-sm flex items-center gap-2 font-bold animate-pulse">
                             {" "}
-                            Click to see Address{" "}
-                            <RhIcon
-                              className="text-white text-xs"
-                              icon="fa-solid:address-book"
-                            ></RhIcon>
-                          </div>
+                            Click to see wishes..
+                          </div> */}
                         </>
                       </CopyToClipboard>
                     )}
@@ -269,47 +334,54 @@ function Index() {
             )}
             {isLoggedIn() && (
               <>
-                <div className="flex w-[90vw] sm:w-[40vw] gap-2 items-center">
+                <div className="flex w-[90vw] mt-2 sm:w-[40vw] gap-2 items-center">
                   <div
                     onClick={() => navigate("/wishlist")}
                     className=" h-10 bg-gradient-to-r w-full gap-2  cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
                   >
                     <p className="animate-bounce"> 🎁 </p>
-                    <p className="text-white font-extrabold">See Wish List</p>
+                    <p className="text-white font-extrabold">Wish List</p>
                   </div>
 
                   <div
                     onClick={() => {
-                      if (currentEmployee?.address?.length >= 5) {
-                        setIsInviteFormOpen(true);
-                      }
+                      // if (currentEmployee?.address?.length >= 5) {
+                      setIsGifDialogOpen(true);
+                      // }
                     }}
-                    className="h-10 bg-gradient-to-r w-full gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
+                    className="h-10 bg-gradient-to-r w-full animate-pulse gap-2 cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
                   >
-                    {currentEmployee?.address?.length > 2 ? (
-                      <RhTooltip
-                        title="You can't edit now, Contact Admin"
-                        position="bottom"
-                      >
-                        {/* <p className="animate-bounce"> 🔐 </p> */}
-                        <p className="text-white font-extrabold">
-                          🔐 Edit My Wishes
-                        </p>
-                      </RhTooltip>
-                    ) : (
+                    {/* {currentEmployee?.address?.length > 2 ? ( */}
+                    <RhTooltip title="Guess Your Monk" position="bottom">
+                      {/* <p className="animate-bounce"> 🔐 </p> */}
+                      <p className="text-white font-extrabold">
+                        🤔 Guess your ?
+                      </p>
+                    </RhTooltip>
+
+                    {/* ) : (
                       <>
                         <p className="animate-bounce"> ✏️ </p>
                         <p className="text-white font-extrabold">
                           Edit My Wishes
                         </p>
                       </>
-                    )}
+                    )} */}
                   </div>
                 </div>
+                <div
+                  onClick={() => setIsGuessedListOpen(true)}
+                  className=" h-10 bg-gradient-to-r w-1/2  gap-2 mt-4  cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
+                >
+                  {/* <p className="animate-bounce"> ❓ </p> */}
+                  <p className="text-white font-extrabold">Who guessed me </p>
+                  <p className="animate-bounce"> ❓ </p>
+                </div>
+                {/* */}
               </>
             )}
-            <div className="flex justify-center flex-col   flex-wrap ">
-              {/* input */}
+            {/* <div className="flex justify-center flex-col   flex-wrap ">
+       
               {
                 <div className="">
                   <div className="h-6  flex justify-center">
@@ -324,7 +396,7 @@ function Index() {
                     <RhInputGroup className="bg-gradient-to-r w-[90vw] sm:w-[40vw] rounded-md animate-pulse  from-[#ff512f] to-[#dd2476]">
                       <RhIcon icon="ic:round-search" size="lg" />
                       <RhInput
-                        // disabled={isLoading}
+                       
                         type="text"
                         placeholder=" Who is your secret monk ?"
                         className="py-4 px-6 "
@@ -350,8 +422,7 @@ function Index() {
                             >
                               <RhListItem.Icon variant="primary" align="start">
                                 <RhAvatar
-                                  // type={data?.receiver?.image ? "image" : "text"}
-                                  // src={data?.receiver?.image}
+                                 
                                   size="sm"
                                   name={"item?.name"}
                                 ></RhAvatar>
@@ -375,7 +446,7 @@ function Index() {
                   </RhScrollbar>
                 </div>
               }
-            </div>
+            </div> */}
 
             {/* <ReactAudioPlayer src={audio} autoPlay controls /> */}
 
@@ -631,8 +702,152 @@ function Index() {
                 </div>
               </div>
             </RhDialog>
+
+            <RhDialog
+              className=" flex flex-col gap-6  w-[90vw] sm:w-[50vw]"
+              isOpen={isGuessedListOpen}
+              onClose={() => {
+                // setShowingData({});
+                setIsGuessedListOpen(false);
+              }}
+            >
+              <div className="p-2 border-0">
+                {/* <RhCardBody> */}
+                <div className="flex justify-between">
+                  <div className="">
+                    <img className="w-24" src={codemonk_logo} alt="" />
+                  </div>
+                  <div
+                    className="cursor-pointer hover:rotate-180 duration-100"
+                    onClick={() => {
+                      setIsGuessedListOpen(false);
+                    }}
+                  >
+                    ❌
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  {!whoGuessedYourList?.length ? (
+                    <img className="lg:w-44 w-32" src={sadSanta} alt="" />
+                  ) : (
+                    <img className="lg:w-44 w-32" src={happySanta} alt="" />
+                  )}
+                  <div className="flex flex-col gap-4 justify-center items-center">
+                    {!whoGuessedYourList?.length ? (
+                      <>
+                        <h1 className="text-lg lg:text-4xl font-rubik text-[#ff512f]">
+                          No one has guessed you.
+                        </h1>
+                        <h2 className="text-sm lg:text-3xl">
+                          Keep Checking !!
+                        </h2>
+                      </>
+                    ) : (
+                      <>
+                        <h1 className="text-lg lg:text-4xl font-rubik text-[#ff512f]">
+                          Hey
+                        </h1>
+
+                        {whoGuessedYourList?.map((data) => {
+                          return <p className="text-xl font-semibold tracking-wide">{data.name}</p>;
+                        })}
+
+                        <p> guessed you as secret santa?</p>
+
+                        <h2 className="text-sm lg:text-xl">
+                          Are you secret monk of these monks ??
+                        </h2>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </RhDialog>
           </div>
         </div>
+
+        <RhDialog
+          className=" flex flex-col gap-6  w-[90vw] sm:w-[50vw]"
+          isOpen={isGifDialogOpen}
+          onClose={() => {
+            // setShowingData({});
+            setIsGifDialogOpen(false);
+          }}
+        >
+          <div className="p-2 border-0">
+            {/* <RhCardBody> */}
+            <div className="flex justify-between">
+              <div className="">
+                <img className="w-24" src={codemonk_logo} alt="" />
+              </div>
+              <div
+                className="cursor-pointer hover:rotate-180 duration-100"
+                onClick={() => {
+                  setIsGifDialogOpen(false);
+                }}
+              >
+                ❌
+              </div>
+            </div>
+            <div className="flex gap-2 justify-center items-center">
+              <img className="lg:w-44 w-32" src={santapoint} alt="" />
+              <div className="flex flex-col gap-4 justify-center items-center">
+                <h1 className="text-lg lg:text-4xl font-rubik text-[#ff512f]">
+                  Hey Monk 👋
+                </h1>
+                <p> Have you received your gift ?</p>
+                <h2 className="text-sm lg:text-3xl">
+                  Who is your secret monk ?
+                </h2>
+                {/* <RhLabel className="text-left">Guess your monk</RhLabel> */}
+                <RhSelect
+                  className="w-full"
+                  options={employees}
+                  value={myMonk}
+                  onChange={(val) => {
+                    setMyMonk(val);
+                  }}
+                  placeholder="Guess your monk"
+                  getOptionValue={(val) => val.name}
+                  getOptionLabel={(val) => val.name}
+                ></RhSelect>
+
+                <div className="">
+                  <RhInput
+                    type="checkbox"
+                    value={isReceived}
+                    checked={isReceived}
+                    onChange={(e) => {
+                      console.log(e);
+                      setIsReceived(!isReceived);
+                    }}
+                  ></RhInput>{" "}
+                  Yes I have received the gift.
+                </div>
+
+                <div className="flex w-full gap-2 justify-end">
+                  {/* <RhButton
+                    onClick={() => {
+                      setIsGifDialogOpen(false);
+                    }}
+                    layout="outline"
+                    className="border border-red-500 text-red-500"
+                  >
+                    Cancel
+                  </RhButton> */}
+                  <RhButton
+                    className="bg-red-500 hover:bg-red-500"
+                    onClick={() => {
+                      onConfirmMonk();
+                    }}
+                  >
+                    Confirm
+                  </RhButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </RhDialog>
 
         {/* //dancing */}
         <div className="absolute bottom-0 right-0">

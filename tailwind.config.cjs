@@ -165,18 +165,7 @@ module.exports = {
         },
       }),
       colors: {
-        primary: {
-          50: "#D5EDFF",
-          100: "#ABD7F8",
-          200: "#83BFED",
-          300: "#67B1E9",
-          400: "#469DDF",
-          500: "#2488D3",
-          600: "#0076CF",
-          700: "#0069B8",
-          800: "#015595",
-          900: "#004071",
-        },
+        primary: colors.red,
         secondary: {
           50: "#F5F5F5",
           100: "#FBFBFD",
