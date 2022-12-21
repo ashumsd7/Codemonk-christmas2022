@@ -738,8 +738,11 @@ function Index() {
                 ❌
               </div>
             </div>
+            <div className="flex justify-center">
+            <img className="lg:w-44 w-32" src={santapoint} alt="" />
+            </div>
             <div className="flex gap-2 justify-center items-center">
-              <img className="lg:w-44 w-32" src={santapoint} alt="" />
+             
               <div className="flex flex-col gap-4 justify-center items-center">
                 <h1 className="text-lg lg:text-4xl font-rubik text-[#ff512f]">
                   Hey Monk 👋
@@ -789,7 +792,7 @@ function Index() {
                     Cancel
                   </RhButton> */}
                   <RhButton
-                    className="bg-red-500 hover:bg-red-500"
+                    className="bg-red-500 hover:bg-red-500 w-full"
                     onClick={() => {
                       onConfirmMonk();
                     }}
