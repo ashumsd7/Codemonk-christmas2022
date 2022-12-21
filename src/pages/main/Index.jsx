@@ -264,6 +264,7 @@ function Index() {
                 <RhDivider></RhDivider>
                 <div className="flex flex-col justify-between items-">
                   {/* name */}
+                <span className="uppercase font-extrabold tracking-widest text-white">  {currentEmployee?.name}</span>
                   <div className=" my-2 gap-1 cursor-pointer text-left text-2xl flex items-center font-extrabold hover:font-extrabold text-white"></div>
                 </div>
                 <div>
@@ -673,12 +674,14 @@ function Index() {
                     ❌
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="my-2 flex justify-center">
                   {!whoGuessedYourList?.length ? (
                     <img className="lg:w-44 w-20" src={sadSanta} alt="" />
                   ) : (
                     <img className="lg:w-44 w-20" src={happySanta} alt="" />
                   )}
+                </div>
+                <div className="flex gap-2 justify-center">
                   <div className="flex flex-col gap-4 justify-center items-center">
                     {!whoGuessedYourList?.length ? (
                       <>
@@ -706,8 +709,12 @@ function Index() {
                         <p> guessed you as secret santa?</p>
 
                         <h2 className="text-sm lg:text-xl">Really ??</h2>
+
+                        
                       </>
                     )}
+
+                 
                   </div>
                 </div>
               </div>
@@ -739,10 +746,9 @@ function Index() {
               </div>
             </div>
             <div className="flex justify-center">
-            <img className="lg:w-44 w-32" src={santapoint} alt="" />
+              <img className="lg:w-44 w-32" src={santapoint} alt="" />
             </div>
             <div className="flex gap-2 justify-center items-center">
-             
               <div className="flex flex-col gap-4 justify-center items-center">
                 <h1 className="text-lg lg:text-4xl font-rubik text-[#ff512f]">
                   Hey Monk 👋
