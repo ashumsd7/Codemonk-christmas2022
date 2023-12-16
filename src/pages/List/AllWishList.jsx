@@ -175,7 +175,7 @@ function AllWishList() {
                     </div>
                     <RhDivider></RhDivider>
                     <p className="text-white text-xs font-thin mt-1">
-                      Cultural & Food committee Codemonk
+                      Cultural  committee Codemonk
                     </p>
                     <p className="flex items-center justify-end gap-1 reltive">
                       {item?.address?.length > 5 && (
