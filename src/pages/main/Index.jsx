@@ -27,7 +27,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { getTokenData, isLoggedIn, logOut } from "../../utils";
 import audio from "../../assets/notify.mp3";
 import car_image from "../../assets/car.svg";
-import codemonk_logo from "../../assets/logocodemonk.png";
+import codemonk_logo from "../../assets/logocodemonk.svg";
 import running from "../../assets/running.gif";
 import bellshanging from "../../assets/bellhanging2.gif";
 import santapoint from "../../assets/santapoint2.jpg";
@@ -138,7 +138,7 @@ function Index() {
     updateProfile({ wishes: data.wishes, address: data.address }).then(() => {
       RhToast.success(" Hurrah updated 🎉");
       setIsInviteFormOpen(false);
-      window.location.reload();
+      // window.location.reload();
     });
   };
 
@@ -151,11 +151,8 @@ function Index() {
             <div className="flex-1">
               <div className=" bg-gradient-to-r py-1 px-4  animate-pulse from-[#ff512f] to-[#dd2476] text-white rounded-md flex justify-center items-center font-extrabold">
                 <marquee behavior="" loop direction="">
-                  📣 If you dont know login details please contact Ashu , Event
-                  Timings Friday at 4pm on 23rd December 📣 Please remember the
-                  date, This Friday at 4pm on 23rd December, Please be available
-                  for the meet. 📣 Event Timings Friday at 4pm on 23rd December
-                  📣 Event Timings Friday at 4pm on 23rd December 📣 : 🎉 🎁
+                  📣 If you dont know login details please contact Kokila Joseph, Event
+                  Timings and date to be announced soon 📣 : 🎉 🎁
                   Merry Christmas
                 </marquee>
               </div>
@@ -192,10 +189,10 @@ function Index() {
                   ODEMONK
                 </h1>
                 <p className="text-right font-rubik mb-2 text-white">
-                  celebrating christmas 2022
+                  celebrating christmas 2023
                 </p>
                 <p className="text-right text-xs text-red-400">
-                  Friday, 23rd Dec. 4:00 PM
+                  Date and timings to be announced soon.
                 </p>
 
                 {isLoggedIn() && (
@@ -248,20 +245,15 @@ function Index() {
                   🔔 Call your Santa
                 </RhButton>
               )}
-
               <h1></h1>
             </div>
           </div>
           <div className="flex justify-center flex-col items-center ">
             {isLoggedIn() && (
               <RhCard
-                // onClick={() => setIsInviteFormOpen(true)}
+                onClick={() => setIsInviteFormOpen(true)}
                 className="w-[90vw] sm:w-[40vw] p-2 my-4 relative cursor-pointer card-hover hover:scale-105 duration-150 ease-out bg-gradient-to-r  from-[#ff512f] to-[#dd2476]"
               >
-                <div className="flex justify-between animate-pulse">
-                  <img className="w-1/2 " src={codemonk_logo} alt="" />
-                </div>
-                <RhDivider></RhDivider>
                 <div className="flex flex-col justify-between items-">
                   {/* name */}
                 <span className="uppercase font-extrabold tracking-widest text-white">  {currentEmployee?.name}</span>
@@ -418,6 +410,7 @@ function Index() {
               >
                 {({ values }) => (
                   <Form>
+                    {console.log(currentEmployee, "888888")}
                     <div>
                       {values?.wishes?.map((wish, index) => (
                         <div className="my-4">
@@ -625,7 +618,7 @@ function Index() {
                       Remembered the Date ?
                     </h1>
                     <h2 className="text-sm lg:text-3xl">
-                      23rd December 2022 @4PM{" "}
+                      To be announced...
                     </h2>
                     {/* <div className="relative w-full m-auto"> */}
                     {/* <div

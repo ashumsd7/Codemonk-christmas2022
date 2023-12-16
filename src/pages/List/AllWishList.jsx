@@ -18,7 +18,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useGetUsersQuery } from "../../services/api";
-import codemonk_logo from "../../assets/logocodemonk.png";
+import codemonk_logo from "../../assets/logocodemonk.svg";
 import bells from "../../assets/bells.jpg";
 import bellshanging from "../../assets/bellhanging2.gif";
 import bellshanging2 from "../../assets/bellhanging.gif";
@@ -205,7 +205,7 @@ function AllWishList() {
                   {item?.address && (
                     <>
                       <div className=" text-white absolute top-4 z-10 right-1 rotate-45 translate-x-11 bg-gray-800 rounded-md  text-xs font-extrabold w-auto inline-block px-6 py-1">
-                        23.12.2022
+                        25.12.2023
                       </div>
                       {item.isGiftReceived ? (
                         <div className="absolute top-7 animate-pulse right-0 h-16 z-20 flex  ">
