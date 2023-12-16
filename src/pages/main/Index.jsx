@@ -46,13 +46,13 @@ function Index() {
   const currentEmployee = employees.find(
     (employee) => employee._id == loggedInUser.id
   );
-  console.log(">>>>>>>currentEmployee>>>", currentEmployee);
+  // console.log(">>>>>>>currentEmployee>>>", currentEmployee);
 
   const whoGuessedYourList = employees?.filter(
     (data) => data?.yourMonk == currentEmployee?.name
   );
 
-  console.log(">>>>>whoGuessedYourList>>>", whoGuessedYourList);
+  // console.log(">>>>>whoGuessedYourList>>>", whoGuessedYourList);
 
   let yourMonk = employees?.find(
     (employee) => employee.name == currentEmployee?.yourMonk
@@ -67,7 +67,7 @@ function Index() {
     setIsReceived(currentEmployee?.isGiftReceived);
   }, [yourMonk]);
 
-  console.log(">>>>>>guessedMonk>>>>>>", yourMonk);
+  // console.log(">>>>>>guessedMonk>>>>>>", yourMonk);
 
   const [searchFilter, setSearchFilter] = useState("");
   const [isShowingLink, setIsShowingLink] = useState(false);
@@ -118,7 +118,7 @@ function Index() {
   }, [searchFilter]);
 
   const onConfirmMonk = (data) => {
-    console.log(">>>>>>>>>>>", {
+    // console.log(">>>>>>>>>>>", {
       isGiftReceived: isReceived,
       yourMonk: myMonk?.name,
     });
@@ -410,11 +410,11 @@ function Index() {
               >
                 {({ values }) => (
                   <Form>
-                    {console.log(currentEmployee, "888888")}
+                    {/* {console.log(currentEmployee, "888888")} */}
                     <div>
                       {values?.wishes?.map((wish, index) => (
                         <div className="my-4">
-                          {console.log(wish)}
+                          {/* {console.log(wish)} */}
                           <RhInputFormik
                             block
                             required
@@ -773,7 +773,7 @@ function Index() {
                     value={isReceived}
                     checked={isReceived}
                     onChange={(e) => {
-                      console.log(e);
+                      // console.log(e);
                       setIsReceived(!isReceived);
                     }}
                   ></RhInput>{" "}

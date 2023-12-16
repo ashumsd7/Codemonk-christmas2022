@@ -19,7 +19,7 @@ function NotFound() {
     setLoading(false);
     // console.log(data);
     const sortedData = data?.splice(1, 10);
-    console.log(sortedData);
+    // console.log(sortedData);
     setTodos(sortedData);
   };
 
@@ -39,13 +39,13 @@ function NotFound() {
         <button
           onClick={() => {
             let splitValue = typedData?.split(" ");
-            console.log(splitValue);
+            // console.log(splitValue);
             if (
               splitValue?.includes("Task") ||
               splitValue?.includes("task") ||
               splitValue?.includes("TASK")
             ) {
-              console.log("hai to");
+              // console.log("hai to");
               return;
             } else {
               setTodos((prev) => {
