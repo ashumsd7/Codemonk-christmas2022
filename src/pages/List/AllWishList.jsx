@@ -80,7 +80,7 @@ function AllWishList() {
         <div className=" bg-gradient-to-r py-1 px-4  from-[#ff512f] to-[#dd2476] text-white rounded-md flex justify-center items-center font-extrabold">
           <marquee behavior="" loop direction="">
             📣 Click the card to show more info like address , Link of gifts and
-            much more... 📣 Missing Address or any help contact Ashu 👋 : 🎉 🎁
+            much more... 📣 Missing Address or any help contact Kokila 👋 : 🎉 🎁
             Merry Christmas
           </marquee>
         </div>
@@ -105,9 +105,9 @@ function AllWishList() {
                   className="p-2 my-4 relative cursor-pointer card-hover hover:scale-105 duration-150 ease-out bg-gradient-to-r  from-[#ff512f] to-[#dd2476]"
                 >
                   <div className="flex justify-between animate-pulse">
-                    <img className="w-1/2 " src={codemonk_logo} alt="" />
+                    {/* <img className="w-1/2 " src={codemonk_logo} alt="" /> */}
                   </div>
-                  <RhDivider></RhDivider>
+                  {/* <RhDivider></RhDivider> */}
                   <div className="flex flex-col justify-between items-">
                     {/* name */}
                     <div className=" my-2 gap-1 cursor-pointer text-left text-2xl flex items-center font-extrabold hover:font-extrabold text-white">
@@ -323,7 +323,7 @@ function AllWishList() {
           {/* <RhCardBody> */}
           <div className="flex justify-between">
             <div className="">
-              <img className="w-24" src={codemonk_logo} alt="" />
+              {/* <img className="w-24" src={codemonk_logo} alt="" /> */}
             </div>
             <div
               className="cursor-pointer hover:rotate-180 duration-100"

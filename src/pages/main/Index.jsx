@@ -42,11 +42,12 @@ import { use } from "echarts";
 function Index() {
   const { data: employees = [] } = useGetUsersQuery();
   const loggedInUser = getTokenData();
+  console.log("loggedInUser", loggedInUser);
 
   const currentEmployee = employees.find(
     (employee) => employee._id == loggedInUser.id
   );
-  // console.log(">>>>>>>currentEmployee>>>", currentEmployee);
+  console.log(">>>>>>>currentEmployee>>>", currentEmployee);
 
   const whoGuessedYourList = employees?.filter(
     (data) => data?.yourMonk == currentEmployee?.name
@@ -119,9 +120,9 @@ function Index() {
 
   const onConfirmMonk = (data) => {
     // console.log(">>>>>>>>>>>", {
-      isGiftReceived: isReceived,
-      yourMonk: myMonk?.name,
-    });
+    //   isGiftReceived: isReceived,
+    //   yourMonk: myMonk?.name,
+    // });
     // return;
     updateProfile({ isGiftReceived: isReceived, yourMonk: myMonk?.name }).then(
       () => {
@@ -151,8 +152,8 @@ function Index() {
             <div className="flex-1">
               <div className=" bg-gradient-to-r py-1 px-4  animate-pulse from-[#ff512f] to-[#dd2476] text-white rounded-md flex justify-center items-center font-extrabold">
                 <marquee behavior="" loop direction="">
-                  📣 If you dont know login details please contact Kokila Joseph, Event
-                  Timings and date to be announced soon 📣 : 🎉 🎁
+                  📣 If you dont know login details please contact Kokila
+                  Joseph, Event Timings and date to be announced soon 📣 : 🎉 🎁
                   Merry Christmas
                 </marquee>
               </div>
@@ -203,7 +204,9 @@ function Index() {
                         className=" h-10 bg-gradient-to-r w-full gap-2  cursor-pointer from-[#ff512f] to-[#dd2476]    rounded-md flex justify-center items-center"
                       >
                         <p className="animate-bounce"> 🎁 </p>
-                        <p className="text-white font-extrabold">Wish List</p>
+                        <p className="text-white font-extrabold">
+                          All Wish List
+                        </p>
                       </div>
 
                       <div
@@ -256,7 +259,10 @@ function Index() {
               >
                 <div className="flex flex-col justify-between items-">
                   {/* name */}
-                <span className="uppercase font-extrabold tracking-widest text-white">  {currentEmployee?.name}</span>
+                  <span className="uppercase font-extrabold tracking-widest text-white">
+                    {" "}
+                    {currentEmployee?.name}
+                  </span>
                   <div className=" my-2 gap-1 cursor-pointer text-left text-2xl flex items-center font-extrabold hover:font-extrabold text-white"></div>
                 </div>
                 <div>
@@ -281,9 +287,13 @@ function Index() {
 
                       <h4 className="text-white">as secret monk</h4>
                     </div>
+                    <p>Click on card to edit your wish list</p>
 
                     <div
-                      onClick={() => setIsGuessedListOpen(true)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsGuessedListOpen(true);
+                      }}
                       className=" h-10  text-red-500  gap-2 mt-4  cursor-pointer bg-white   rounded-md flex justify-center items-center"
                     >
                       <p className="t font-extrabold">Who guessed me </p>
@@ -320,8 +330,7 @@ function Index() {
               </RhCard>
             )}
 
-            {/* <div className="flex justify-center flex-col   flex-wrap ">
-       
+            <div className="flex justify-center flex-col   flex-wrap ">
               {
                 <div className="">
                   <div className="h-6  flex justify-center">
@@ -336,7 +345,6 @@ function Index() {
                     <RhInputGroup className="bg-gradient-to-r w-[90vw] sm:w-[40vw] rounded-md animate-pulse  from-[#ff512f] to-[#dd2476]">
                       <RhIcon icon="ic:round-search" size="lg" />
                       <RhInput
-                       
                         type="text"
                         placeholder=" Who is your secret monk ?"
                         className="py-4 px-6 "
@@ -362,7 +370,6 @@ function Index() {
                             >
                               <RhListItem.Icon variant="primary" align="start">
                                 <RhAvatar
-                                 
                                   size="sm"
                                   name={"item?.name"}
                                 ></RhAvatar>
@@ -386,7 +393,7 @@ function Index() {
                   </RhScrollbar>
                 </div>
               }
-            </div> */}
+            </div>
 
             {/* <ReactAudioPlayer src={audio} autoPlay controls /> */}
 
@@ -617,9 +624,7 @@ function Index() {
                     <h1 className="text-lg lg:text-4xl font-rubik text-[#ff512f]">
                       Remembered the Date ?
                     </h1>
-                    <h2 className="text-sm lg:text-3xl">
-                      To be announced...
-                    </h2>
+                    <h2 className="text-sm lg:text-3xl">To be announced...</h2>
                     {/* <div className="relative w-full m-auto"> */}
                     {/* <div
                       onClick={() => {
@@ -702,12 +707,8 @@ function Index() {
                         <p> guessed you as secret santa?</p>
 
                         <h2 className="text-sm lg:text-xl">Really ??</h2>
-
-                        
                       </>
                     )}
-
-                 
                   </div>
                 </div>
               </div>
