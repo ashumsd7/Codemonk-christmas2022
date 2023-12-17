@@ -42,12 +42,12 @@ import { use } from "echarts";
 function Index() {
   const { data: employees = [] } = useGetUsersQuery();
   const loggedInUser = getTokenData();
-  console.log("loggedInUser", loggedInUser);
+  // console.log("loggedInUser", loggedInUser);
 
   const currentEmployee = employees.find(
     (employee) => employee._id == loggedInUser.id
   );
-  console.log(">>>>>>>currentEmployee>>>", currentEmployee);
+  // console.log(">>>>>>>currentEmployee>>>", currentEmployee);
 
   const whoGuessedYourList = employees?.filter(
     (data) => data?.yourMonk == currentEmployee?.name
@@ -330,7 +330,7 @@ function Index() {
               </RhCard>
             )}
 
-            <div className="flex justify-center flex-col   flex-wrap ">
+            {/* <div className="flex justify-center flex-col   flex-wrap ">
               {
                 <div className="">
                   <div className="h-6  flex justify-center">
@@ -393,7 +393,7 @@ function Index() {
                   </RhScrollbar>
                 </div>
               }
-            </div>
+            </div> */}
 
             {/* <ReactAudioPlayer src={audio} autoPlay controls /> */}
 

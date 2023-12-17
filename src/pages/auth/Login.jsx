@@ -3,6 +3,7 @@ import LoginForm from "./components/LoginForm";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../services/api";
 import side_image from "../../assets/login2.svg";
+import { RhToast } from "@rhythm-ui/react";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,7 +13,11 @@ function Login() {
     login(data)
       .unwrap()
       .then((res) => {
-        console.log(res);
+        console.log("Asssssssss", res);
+        if (res?.error) {
+          RhToast.error("Invalid Creds");
+          return;
+        }
         localStorage.setItem("token", res.token);
 
         // localStorage.setItem("refresh", res.refresh);
