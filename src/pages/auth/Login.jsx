@@ -12,9 +12,9 @@ function Login() {
     login(data)
       .unwrap()
       .then((res) => {
-        console.log(res)
+        console.log(res);
         localStorage.setItem("token", res.token);
-        return
+
         // localStorage.setItem("refresh", res.refresh);
         navigate("/");
       });
